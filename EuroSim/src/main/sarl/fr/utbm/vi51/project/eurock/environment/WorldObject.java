@@ -6,6 +6,38 @@ import fr.utbm.vi51.project.eurock.semantics.Semantics;
 
 public class WorldObject {
 
+	public Point2f getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point2f position) {
+		this.position = position;
+	}
+
+	public Enum getState() {
+		return state;
+	}
+
+	public void setState(Enum state) {
+		this.state = state;
+	}
+
+	public Semantics[] getSemantics() {
+		return semantics;
+	}
+
+	public void setSemantics(Semantics[] semantics) {
+		this.semantics = semantics;
+	}
+
+	public Shape getShape() {
+		return shape;
+	}
+
+	public void setShape(Shape shape) {
+		this.shape = shape;
+	}
+
 	private Point2f position;
 
 	private Enum state;
