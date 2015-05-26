@@ -1,7 +1,11 @@
 package fr.utbm.vi51.project.eurock.frustrum;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
+import fr.utbm.vi51.project.eurock.tree4d.QuadTree;
+import fr.utbm.vi51.project.eurock.tree4d.QuadTreeNode;
 import fr.utbm.vi51.project.eurock.general.Point2f;
 import fr.utbm.vi51.project.eurock.general.Vector2f;
 
@@ -52,6 +56,73 @@ public class Frustrum {
 		return this.allShape;
 	}
 	
-	
+	/**
+	 * Dès qu'il y a l'arbre on peut mettre à jours l'itérateur
+	 * @author elvil
+	 *
+	 * @param <D>
+	 */
+	/*private static class frustumIterator implements Iterator<Shape>{
+		
+		//Iterateur sur les noeuds de l'arbre
+		private IteratorAllNode iterateData;
+		private Stack<Shape> stack = new Stack<Shape>();
+		private Shape boundsFrustum;
+		
+		public frustumIterator(QuadTree root,Shape bounds) {
+			iterateData = new IteratorAllNode(root);
+			this.boundsFrustum = bounds;
+			searchNext();
+		}
+		
+		public void searchNext(){
+			if(stack.isEmpty()){
+				while(iterateData.hasNext() && stack.size() <= 2){
+					QuadTreeNode tmp = iterateData.next();
+					verifBound(tmp);				
+				}
+			}
+		}
+		
+		public Boolean verifBound(QuadTreeNode tmp){
+			Shape objectBounds;
+			if(tmp.getData() != null && tmp.getData().size() > 0){
+				
+				if(this.boundsFrustum.intersects(tmp.getBounds())){
+					
+					for(Shape par : tmp.getData()){
+						
+						objectBounds = par.getShape();
+						
+						if(this.boundsFrustum.intersects(objectBounds)){
+							stack.add(par);
+						}
+						
+					}
+					
+				}
+			}
+			
+			return null;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			if(stack.isEmpty()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		@Override
+		public Shape next() {
+			Shape tmp;
+			tmp = stack.pop();
+			searchNext();
+			return tmp;
+		}
+		
+	}*/
 
 }
