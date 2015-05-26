@@ -5,6 +5,16 @@ import fr.utbm.vi51.project.eurock.general.Vector2f;
 
 public class MobileObject extends WorldObject {
 
+	private Vector2f currentLinearSpeed;
+
+	private Vector2f currentAngularSpeed;
+
+	private float maxLinearSpeed;
+
+	private float maxAngularSpeed;
+
+	private float maxAcceleration;
+	
 	public Vector2f getCurrentLinearSpeed() {
 		return currentLinearSpeed;
 	}
@@ -44,15 +54,5 @@ public class MobileObject extends WorldObject {
 	public void setMaxAcceleration(float maxAcceleration) {
 		this.maxAcceleration = maxAcceleration;
 	}
-
-	private Vector2f currentLinearSpeed;
-
-	private Vector2f currentAngularSpeed;
-
-	private float maxLinearSpeed;
-
-	private float maxAngularSpeed;
-
-	private float maxAcceleration;
 
 }
