@@ -11,6 +11,14 @@ import fr.utbm.vi51.project.eurock.semantics.Semantics;
  */
 public class WorldObject {
 
+	private Point2f position;
+
+	private Enum state;
+
+	private Semantics[] semantics;
+
+	private Shape shape;
+	
 	public Point2f getPosition() {
 		return position;
 	}
@@ -42,13 +50,5 @@ public class WorldObject {
 	public void setShape(Shape shape) {
 		this.shape = shape;
 	}
-
-	private Point2f position;
-
-	private Enum state;
-
-	private Semantics[] semantics;
-
-	private Shape shape;
 
 }
