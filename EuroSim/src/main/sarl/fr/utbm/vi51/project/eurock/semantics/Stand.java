@@ -1,5 +1,10 @@
 package fr.utbm.vi51.project.eurock.semantics;
 
-public class Stand implements Semantics {
+public class Stand extends Semantics {
+
+	public Stand(String nom) {
+		super(nom);
+		// TODO Auto-generated constructor stub
+	}
 
 }
