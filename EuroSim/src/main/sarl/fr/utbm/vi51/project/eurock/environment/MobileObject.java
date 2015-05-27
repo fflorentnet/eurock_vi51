@@ -15,6 +15,8 @@ public class MobileObject extends WorldObject {
 
 	private float maxAcceleration;
 	
+	private State state;	
+	
 	public Vector2f getCurrentLinearSpeed() {
 		return currentLinearSpeed;
 	}
