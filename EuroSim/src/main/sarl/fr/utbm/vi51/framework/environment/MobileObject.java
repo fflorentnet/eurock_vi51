@@ -20,7 +20,7 @@
  */
 package fr.utbm.vi51.framework.environment;
 
-import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 /**
  * Object on the environment.

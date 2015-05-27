@@ -20,8 +20,8 @@
  */
 package fr.utbm.vi51.framework.math;
 
-import com.google.common.base.Objects;
 
+import com.google.common.base.Objects;
 
 /** 2D Rectangle with floating-point values.
  *

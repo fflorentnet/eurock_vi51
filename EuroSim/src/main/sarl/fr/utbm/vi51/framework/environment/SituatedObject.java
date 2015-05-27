@@ -23,7 +23,7 @@ package fr.utbm.vi51.framework.environment;
 import java.io.Serializable;
 import java.util.UUID;
 
-import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Point2f;
 
 /**
  * Object on the environment.

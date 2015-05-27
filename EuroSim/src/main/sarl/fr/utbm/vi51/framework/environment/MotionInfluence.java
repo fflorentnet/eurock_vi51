@@ -22,7 +22,7 @@ package fr.utbm.vi51.framework.environment;
 
 import java.util.UUID;
 
-import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 
 /**

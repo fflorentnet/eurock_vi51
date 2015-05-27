@@ -23,8 +23,9 @@ package fr.utbm.vi51.framework.environment;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import fr.utbm.info.vi51.framework.math.Rectangle2f;
-import fr.utbm.info.vi51.framework.math.Shape2f;
+import fr.utbm.vi51.framework.math.Rectangle2f;
+import fr.utbm.vi51.framework.math.Shape2f;
+
 
 /**
  * Definition of a spatial data-structure.

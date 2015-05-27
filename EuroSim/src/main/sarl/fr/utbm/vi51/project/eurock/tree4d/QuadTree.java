@@ -2,21 +2,22 @@ package fr.utbm.vi51.project.eurock.tree4d;
 
 import java.util.Iterator;
 
-import fr.utbm.vi51.framework.environment.SituatedObject;
+import fr.utbm.vi51.framework.environment.ShapedObject;
 import fr.utbm.vi51.framework.environment.SpatialDataStructure;
 import fr.utbm.vi51.framework.math.Rectangle2f;
 import fr.utbm.vi51.framework.math.Shape2f;
 
-public class QuadTree <D extends SituatedObject>  {
+public class QuadTree <D extends ShapedObject> implements SpatialDataStructure<D>/*, Iterable<QuadTreeNode<D> > */ {
 
 	QuadTreeNode<D> root = null;
-	Iterator<QuadTreeNode<D>> it =  null;
+	Iterator<QuadTreeNode<?>> it =  null;
 	public void initialize(Rectangle2f worldSize) {
 		root = new QuadTreeNode<D>(worldSize);
 //		it = new FrustrumCullerTreeIterator(root, new CircleFrustum());
 //		it = new LeafTreeIterator(root);
 	}
 
+	@Override
 	public Rectangle2f getBounds() {
 		if (root != null)
 			return root.getBounds();
@@ -24,8 +25,8 @@ public class QuadTree <D extends SituatedObject>  {
 	}
 
 	public Iterator dataIterator() {
-	//	return new LeafTreeIterator(root);
-		return null,
+		//return new LeafTreeIterator(root);
+		return null;
 	}
 
 	public Iterable<D> getData() {
@@ -35,6 +36,11 @@ public class QuadTree <D extends SituatedObject>  {
 				return dataIterator();
 			}
 		};
+	}
+
+	public Iterator<D> dataIterator(Shape2f<?> bounds) {
+		//return new FrustumCullerTreeIterator<D>(root, bounds);
+		return null;
 	}
 
 	public void setRoot(QuadTreeNode<D> newRoot) {
@@ -58,5 +64,4 @@ public class QuadTree <D extends SituatedObject>  {
 	public Iterator iterator() {
 		return it;
 	}
-
 }

@@ -25,9 +25,9 @@ import java.util.UUID;
 
 import com.google.common.base.Objects;
 
-import fr.utbm.info.vi51.framework.math.Point2f;
-import fr.utbm.info.vi51.framework.math.Shape2f;
-import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Shape2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 /**
  * Defined a perception unit.

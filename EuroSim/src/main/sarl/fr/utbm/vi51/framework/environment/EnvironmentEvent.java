@@ -22,8 +22,6 @@ package fr.utbm.vi51.framework.environment;
 
 import java.util.EventObject;
 
-import fr.utbm.info.vi51.framework.gui.WorldModelStateProvider;
-
 /**
  * Event in environment.  
  * 

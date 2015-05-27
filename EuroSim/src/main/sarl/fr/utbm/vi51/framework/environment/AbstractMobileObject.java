@@ -22,12 +22,10 @@ package fr.utbm.vi51.framework.environment;
 
 import java.util.UUID;
 
-import fr.utbm.info.vi51.framework.math.MathUtil;
-import fr.utbm.info.vi51.framework.math.Rectangle2f;
-import fr.utbm.info.vi51.framework.math.Shape2f;
-import fr.utbm.info.vi51.framework.math.Vector2f;
-import fr.utbm.info.vi51.framework.time.TimeManager;
-import fr.utbm.info.vi51.framework.util.LocalizedString;
+import fr.utbm.vi51.framework.math.MathUtil;
+import fr.utbm.vi51.framework.math.Rectangle2f;
+import fr.utbm.vi51.framework.math.Shape2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 /**
  * Abstract implementation of an object on the environment.

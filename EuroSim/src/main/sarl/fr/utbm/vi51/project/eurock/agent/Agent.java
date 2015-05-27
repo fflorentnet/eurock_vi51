@@ -1,9 +1,9 @@
 package fr.utbm.vi51.project.eurock.agent;
 
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 import fr.utbm.vi51.project.eurock.behaviour.FleeBehaviour;
 import fr.utbm.vi51.project.eurock.environment.Body;
-import fr.utbm.vi51.project.eurock.general.Point2f;
-import fr.utbm.vi51.project.eurock.general.Vector2f;
 
 public abstract class Agent {
 

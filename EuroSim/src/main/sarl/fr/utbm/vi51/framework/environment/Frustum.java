@@ -24,9 +24,9 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.UUID;
 
-import fr.utbm.info.vi51.framework.math.Point2f;
-import fr.utbm.info.vi51.framework.math.Shape2f;
-import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Shape2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 /**
  * Define a field-of-view.

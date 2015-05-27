@@ -3,12 +3,11 @@ package fr.utbm.vi51.project.eurock.tree4d;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.utbm.vi51.framework.environment.SituatedObject;
+import fr.utbm.vi51.framework.environment.ShapedObject;
 import fr.utbm.vi51.framework.math.Point2f;
 import fr.utbm.vi51.framework.math.Rectangle2f;
 
-
-public class QuadTreeNode<D extends SituatedObject> {
+public class QuadTreeNode<D extends ShapedObject> {
 	List<D> lData;
 	final int LIMITE = 4;
 	Rectangle2f bounds = null;
@@ -40,16 +39,16 @@ public class QuadTreeNode<D extends SituatedObject> {
 	}
 	public void add(D nData)
 	{
+		Point2f nPoint = nData.getShape().getBounds().getCenter();
 		Point2f Lower = bounds.getLower();
 		Point2f Upper = bounds.getUpper();
 		Point2f Center = bounds.getCenter();
-		
 		// Recherche de la position du noeud
-		boolean nTop = (nData.getY() < Center.getY());
-		boolean nLeft= (nData.getX()  < Center.getX());
+		boolean nTop = (nPoint.getY() < Center.getY());
+		boolean nLeft= (nPoint.getX()  < Center.getX());
 		
-		boolean onY = (nData.getY() == Center.getY());
-		boolean onX = (nData.getX() == Center.getX());
+		boolean onY = (nPoint.getY() == Center.getY());
+		boolean onX = (nPoint.getX() == Center.getX());
 		
 		// Le noeud n'est pas une feuille
 		// OU il se trouve sur un axe/dans deux noeuds
@@ -98,9 +97,10 @@ public class QuadTreeNode<D extends SituatedObject> {
 		else
 		{
 			Point2f Center = bounds.getCenter();	
+			Point2f rPoint = rData.getShape().getBounds().getCenter();
 			// Recherche de la position de l'objet
-			boolean nTop = (rData.getY() < Center.getY());
-			boolean nLeft= (rData.getX()  < Center.getX());
+			boolean nTop = (rPoint.getY() < Center.getY());
+			boolean nLeft= (rPoint.getX()  < Center.getX());
 			if (nTop && nLeft)
 				return leftTop.remove(rData);
 			else if (nTop && !nLeft)
@@ -114,7 +114,7 @@ public class QuadTreeNode<D extends SituatedObject> {
 	public boolean isLeaf() {
 		return (leftTop == null) && (rightTop == null) && (leftBottom == null) && (rightBottom == null);
 	}
-	public QuadTreeNode[] getChildren() {
+	public QuadTreeNode<D>[] getChildren() {
 		QuadTreeNode<D> lChildren[] = new QuadTreeNode[4];
 		lChildren[0] = (leftTop);
 		lChildren[1] = (rightTop);
@@ -123,4 +123,3 @@ public class QuadTreeNode<D extends SituatedObject> {
 		return lChildren;
 	}
 }
-	

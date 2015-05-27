@@ -20,7 +20,7 @@
  */
 package fr.utbm.vi51.framework.environment;
 
-import fr.utbm.info.vi51.framework.math.Shape2f;
+import fr.utbm.vi51.framework.math.Shape2f;
 
 /**
  * Object on the environment.

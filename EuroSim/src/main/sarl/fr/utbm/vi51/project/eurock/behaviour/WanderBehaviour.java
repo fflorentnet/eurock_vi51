@@ -2,8 +2,8 @@ package fr.utbm.vi51.project.eurock.behaviour;
 
 import java.util.Random;
 
-import fr.utbm.vi51.project.eurock.general.Point2f;
-import fr.utbm.vi51.project.eurock.general.Vector2f;
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 /**
  * Comportement direction aléatoire

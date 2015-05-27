@@ -1,6 +1,6 @@
 package fr.utbm.vi51.project.eurock.environment;
 
-import fr.utbm.vi51.project.eurock.general.Vector2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 
 
 public class MobileObject extends WorldObject {
