@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package fr.utbm.vi51.project.eurock.^agent
+
+/**
+ * @author Thomas
+ *
+ */
+agent Artist extends Agent {
+	
+}
