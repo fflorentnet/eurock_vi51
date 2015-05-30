@@ -3,9 +3,12 @@
  */
 package fr.utbm.vi51.project.eurock.^agent
 
+import fr.utbm.info.vi51.framework.^agent.AbstractAnimat
+
 /**
  * @author Thomas
  *
  */
-agent Spectator {
+agent Spectator extends AbstractAnimat {
+	
 }

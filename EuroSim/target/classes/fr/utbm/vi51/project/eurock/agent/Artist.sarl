@@ -3,10 +3,86 @@
  */
 package fr.utbm.vi51.project.eurock.^agent
 
+import fr.utbm.info.vi51.framework.^agent.AbstractAnimat
+import fr.utbm.info.vi51.framework.^agent.PhysicEnvironment
+import io.sarl.core.Lifecycle
+import io.sarl.core.DefaultContextInteractions
+import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour
+import io.sarl.core.Initialize
+import fr.utbm.info.vi51.framework.environment.PerceptionEvent
+import fr.utbm.info.vi51.framework.environment.SimulationAgentReady
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour
+import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
+
 /**
  * @author Thomas
  *
  */
-agent Artist extends Agent {
+agent Artist extends AbstractAnimat {
 	
+	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
+
+	var fleeBehaviour : FleeBehaviour	// To escape the bomb
+	var seekBehaviourExit : SeekBehaviour	// To search the exit
+	var seekBehaviourEntryScene : SeekBehaviour;	// To enter on scene
+	var seekBehaviourBackStage : SeekBehaviour;		// To go behind the scene when the concert is finish
+	
+	
+	/* The agent is on the scene */
+	on Initialize{
+		super._handle_Initialize_0(occurrence)
+		this.seekBehaviourExit = new SteeringSeekBehaviour;
+		this.seekBehaviourEntryScene = new SteeringSeekBehaviour;
+		this.seekBehaviourBackStage = new SteeringSeekBehaviour;
+		this.fleeBehaviour = new SteeringFleeBehaviour; 
+		emit(new SimulationAgentReady)
+	}
+	
+	on PerceptionEvent{
+		var target = occurrence.perceptions.first
+		
+		if (target == "ALERT") {
+			emitInfluence(
+				this.seekBehaviourExit.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("SCARED")
+			)	
+		} else if (target === "BOMB") {
+			emitInfluence(
+				this.fleeBehaviour.runFlee(
+					occurrence.body.position,
+					occurrence.body.currentLinearSpeed,
+					occurrence.body.maxLinear,
+					target.position
+				),
+				new TypeChangeInfluence("SCARED")
+			)
+		} else if (target === "SCENE") {
+			emitInfluence(
+				this.seekBehaviourEntryScene.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("PLAYING")
+			)
+		} else if (target === "BACKSTAGE") {
+			emitInfluence(
+				this.seekBehaviourBackStage.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("BACKSTAGE")
+			)
+		}
+	}
 }

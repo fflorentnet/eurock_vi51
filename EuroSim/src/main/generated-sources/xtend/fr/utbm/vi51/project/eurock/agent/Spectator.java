@@ -1,14 +1,14 @@
 package fr.utbm.vi51.project.eurock.agent;
 
+import fr.utbm.info.vi51.framework.agent.AbstractAnimat;
 import io.sarl.lang.annotation.Generated;
-import io.sarl.lang.core.Agent;
 import java.util.UUID;
 
 /**
  * @author Thomas
  */
 @SuppressWarnings("all")
-public class Spectator extends Agent {
+public class Spectator extends AbstractAnimat {
   /**
    * Construct an agent.
    * @param parentID - identifier of the parent. It is the identifier of the parent agent and the enclosing contect, at the same time.
