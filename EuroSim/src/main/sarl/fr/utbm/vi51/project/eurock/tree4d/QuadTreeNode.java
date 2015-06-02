@@ -12,15 +12,19 @@ public class QuadTreeNode<D extends ShapedObject> {
 	final int LIMITE = 4;
 	Rectangle2f bounds = null;
 	QuadTreeNode<D> parent = null;
-	QuadTreeNode<D> leftTop = null;
-	QuadTreeNode<D> rightTop = null;
-	QuadTreeNode<D> leftBottom = null;
-	QuadTreeNode<D> rightBottom = null;
+	QuadTreeNode children[];
+
+	private static int LEFTTOP = 1;
+	private static int RIGHTTOP = 2;
+	private static int LEFTBOTTOM = 3;
+	private static int RIGHTBOTTOM = 0;
 	
+
 	// Création du root (parent = null)
 	public QuadTreeNode(Rectangle2f r) {
 		bounds = r;
 		lData = new ArrayList<D>();
+		children = new QuadTreeNode[4];
 	}
 	public QuadTreeNode(QuadTreeNode<D> pa, Rectangle2f r)
 	{
@@ -28,98 +32,86 @@ public class QuadTreeNode<D extends ShapedObject> {
 		parent = pa;
 		lData = new ArrayList<D>();
 	}
-	
+
 	public Rectangle2f getBounds() {
 		return bounds;
 	}
-	
+
 	public void setParent(QuadTreeNode<D> p)
 	{
 		parent = p;
 	}
 	public void add(D nData)
 	{
-		Point2f nPoint = nData.getShape().getBounds().getCenter();
-		Point2f Lower = bounds.getLower();
-		Point2f Upper = bounds.getUpper();
-		Point2f Center = bounds.getCenter();
-		// Recherche de la position du noeud
-		boolean nTop = (nPoint.getY() < Center.getY());
-		boolean nLeft= (nPoint.getX()  < Center.getX());
-		
-		boolean onY = (nPoint.getY() == Center.getY());
-		boolean onX = (nPoint.getX() == Center.getX());
-		
-		// Le noeud n'est pas une feuille
-		// OU il se trouve sur un axe/dans deux noeuds
-		if (lData.size() < LIMITE || !onY || !onX)
+		if (nData.getShape().intersects(this.getBounds()))
 		{
-			lData.add(nData);
+			Point2f Lower = bounds.getLower();
+			Point2f Upper = bounds.getUpper();
+			Point2f Center = bounds.getCenter();
+
+			// Le noeud est une feuille avec des données:
+			// -> Il faut créer les fils
+			if (lData.isEmpty())
+			{
+				children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
+				children[RIGHTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(
+						Center.getX(), Lower.getY(), 
+						Upper.getX(),  Lower.getY()
+						));
+				children[LEFTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f( 
+						Center.getX(), Lower.getY(),
+						Upper.getX(), Center.getY()
+						));
+				children[RIGHTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
+
+				children[LEFTTOP].add(nData);
+
+				children[RIGHTTOP].add(nData);
+
+				children[LEFTBOTTOM].add(nData);
+
+				children[RIGHTBOTTOM].add(nData);
+			}
+
+			// Le noeud n'est pas une feuille
+			// OU il se trouve sur un axe/dans deux noeuds
+			if (lData.size() < LIMITE)
+			{
+				lData.add(nData);
+			}
 		}
-		// Le noeud est une feuille avec des données:
-		// -> Il faut créer les fils
-		else
-		{
-			leftTop = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
-			rightTop = new QuadTreeNode<D>(this, new Rectangle2f(
-					Center.getX(), Lower.getY(), 
-					Upper.getX(),  Lower.getY()
-					));
-			leftBottom = new QuadTreeNode<D>(this, new Rectangle2f( 
-					Center.getX(), Lower.getY(),
-					Upper.getX(), Center.getY()
-					));
-			rightBottom = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
-		if (nTop && nLeft)
-			leftTop.add(nData);
-		else if (nTop && !nLeft)
-			rightTop.add(nData);
-		else if (!nTop && nLeft)
-			leftBottom.add(nData);
-		else
-			rightBottom.add(nData);
-		}
+
 	}
+	//}
 	public QuadTreeNode<D> getParent() {
 		return parent;
 	}
-	
+
 	public List<D> getData() {
 		return lData;
 	}
 	public boolean remove(D rData)
 	{
-		if (lData.contains(rData))
+		if (lData.contains(rData) || this.getBounds().intersects(rData.getShape()))
 		{
 			lData.remove(rData);
+			
+			children[LEFTTOP].remove(rData);
+			children[RIGHTTOP].remove(rData);
+			children[LEFTBOTTOM].remove(rData);
+			children[RIGHTBOTTOM].remove(rData);		
+		
 			return true;
 		}
 		else
 		{
-			Point2f Center = bounds.getCenter();	
-			Point2f rPoint = rData.getShape().getBounds().getCenter();
-			// Recherche de la position de l'objet
-			boolean nTop = (rPoint.getY() < Center.getY());
-			boolean nLeft= (rPoint.getX()  < Center.getX());
-			if (nTop && nLeft)
-				return leftTop.remove(rData);
-			else if (nTop && !nLeft)
-				return rightTop.remove(rData);
-			else if (!nTop && nLeft)
-				return leftBottom.remove(rData);
-			else
-				return rightBottom.remove(rData);		
+			return false;
 		}
 	}
 	public boolean isLeaf() {
-		return (leftTop == null) && (rightTop == null) && (leftBottom == null) && (rightBottom == null);
+		return (children[LEFTTOP] == null) && (children[RIGHTTOP] == null) && (children[LEFTBOTTOM] == null) && (children[RIGHTBOTTOM] == null);
 	}
 	public QuadTreeNode<D>[] getChildren() {
-		QuadTreeNode<D> lChildren[] = new QuadTreeNode[4];
-		lChildren[0] = (leftTop);
-		lChildren[1] = (rightTop);
-		lChildren[2] = (leftBottom);
-		lChildren[3] = (rightBottom);
-		return lChildren;
+		return children;
 	}
 }
