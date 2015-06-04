@@ -1,0 +1,64 @@
+/**
+ * 
+ */
+package fr.utbm.vi51.project.eurock.^agent
+
+import fr.utbm.info.vi51.framework.^agent.AbstractAnimat
+import fr.utbm.info.vi51.framework.^agent.PhysicEnvironment
+import io.sarl.core.Lifecycle
+import io.sarl.core.DefaultContextInteractions
+import io.sarl.core.Initialize
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringWanderBehaviour
+import fr.utbm.info.vi51.framework.math.MathUtil;
+import fr.utbm.info.vi51.framework.environment.SimulationAgentReady
+import fr.utbm.info.vi51.framework.environment.PerceptionEvent
+import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
+
+/**
+ * @author Thomas
+ *
+ */
+agent SecurityAgent extends AbstractAnimat {
+	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
+	
+	val STOP_RADIUS = MathUtil.PI/10f
+	val SLOW_RADIUS = MathUtil.PI/4f
+	val WANDER_CIRCLE_DISTANCE = 20f
+	val WANDER_CIRCLE_RADIUS = 10f
+	val WANDER_MAX_ROTATION = MathUtil.PI/4f
+
+	var wanderBehaviour : SteeringWanderBehaviour;
+	
+	/* The agent is on the scene */
+	on Initialize{
+		super._handle_Initialize_0(occurrence)
+		this.wanderBehaviour = new SteeringWanderBehaviour(
+					WANDER_CIRCLE_DISTANCE, 
+					WANDER_CIRCLE_RADIUS, 
+					WANDER_MAX_ROTATION,
+					STOP_RADIUS,
+					SLOW_RADIUS)
+		emit(new SimulationAgentReady)
+	}
+	
+	on PerceptionEvent{
+		var target = occurrence.perceptions.first
+		
+		if (target == null) {
+			emitInfluence(
+				this.wanderBehaviour.runWander(
+				occurrence.body.position,
+				occurrence.body.direction,
+				occurrence.body.currentLinearSpeed,
+				occurrence.body.maxLinear,
+				occurrence.body.currentAngularSpeed,
+				occurrence.body.maxAngular
+				),
+				new TypeChangeInfluence("BODY")
+			)
+		} else if (target === "BOMB") {
+			
+			/* COMMUNIQUER L'ALERTE AUX AUTRES -> COMMENT FAIRE ? */
+		}
+	}
+}

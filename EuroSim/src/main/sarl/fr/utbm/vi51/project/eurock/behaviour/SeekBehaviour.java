@@ -1,5 +1,7 @@
 package fr.utbm.vi51.project.eurock.behaviour;
 
+import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.vi51.project.eurock.general.Point2f;
 import fr.utbm.vi51.project.eurock.general.Vector2f;
 
@@ -14,8 +16,10 @@ public class SeekBehaviour implements Behaviour {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Vector2f runBehavior(Point2f position, float maxlinearSpeed,
+	public BehaviourOutput runBehavior(Point2f position, float maxlinearSpeed,
 			float maxAcceleration,float maxAngularSpeed, Vector2f currentLinearSpeed, Point2f target) {
+		
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
 
 		Vector2f direction = target.operator_minus(position);
 
@@ -32,7 +36,7 @@ public class SeekBehaviour implements Behaviour {
 		
 		//Ajouter la notion de maxAngularSpeed
 		
-		return direction;
+		return output;
 		
 	}
 
