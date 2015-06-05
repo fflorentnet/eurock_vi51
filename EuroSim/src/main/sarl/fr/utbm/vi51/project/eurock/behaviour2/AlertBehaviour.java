@@ -1,6 +1,7 @@
 package fr.utbm.vi51.project.eurock.behaviour2;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
 
 /**
  * @author Nicolas
@@ -8,11 +9,14 @@ import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
  */
 
 public class AlertBehaviour {
-
-	private final float circleDistance;
 	
-	public BehaviourOutput runAlert(float circleDistance) {
+	public BehaviourOutput runAlert(float alertRadius) {
+		
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
+		
 		// Calculate the circle center
-		Vector2f circleCenter = orientation.toColinearVector(this.circleDistance);
+		//Vector2f circleCenter = orientation.toColinearVector(alertRadius);
+		
+		return output;
 	}
 }

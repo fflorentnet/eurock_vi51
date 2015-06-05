@@ -8,6 +8,7 @@ public class SteeringArrivingBehaviour implements ArrivingBehaviour{
 	@Override
 	public BehaviourOutput runArriving(Point2f position, float linearSpeed, float maxLinearAcc, Point2f target) {
 		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
+		return output;
 		
 	}
 }

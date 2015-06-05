@@ -15,6 +15,7 @@ import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour
 import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour
 import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
+import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour
 
 /**
  * @author Thomas
@@ -24,11 +25,13 @@ agent Artist extends AbstractAnimat {
 	
 	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
 
-	var fleeBehaviour : FleeBehaviour	// To escape the bomb
-	var seekBehaviourExit : SeekBehaviour	// To search the exit
+	var fleeBehaviour : FleeBehaviour				// To escape the bomb
+	var seekBehaviourExit : SeekBehaviour			// To search the exit
 	var seekBehaviourEntryScene : SeekBehaviour;	// To enter on scene
 	var seekBehaviourBackStage : SeekBehaviour;		// To go behind the scene when the concert is finish
+	var alertBehaviour : AlertBehaviour; 			// To alert the others when he is alerted (spreading the alert)	
 	
+	val ALERT_RADIUS = 5f;
 	
 	/* The agent is on the scene */
 	on Initialize{
@@ -37,13 +40,21 @@ agent Artist extends AbstractAnimat {
 		this.seekBehaviourEntryScene = new SteeringSeekBehaviour;
 		this.seekBehaviourBackStage = new SteeringSeekBehaviour;
 		this.fleeBehaviour = new SteeringFleeBehaviour; 
+		this.alertBehaviour = new AlertBehaviour;
 		emit(new SimulationAgentReady)
 	}
 	
 	on PerceptionEvent{
 		var target = occurrence.perceptions.first
 		
-		if (target == "ALERT") {
+		if (target === "ALERT") {
+			emitInfluence(
+				this.alertBehaviour.runAlert(
+					ALERT_RADIUS
+				),
+				new TypeChangeInfluence("ESCAPING")
+			)	
+		} else if (target === "ESCAPE") {
 			emitInfluence(
 				this.seekBehaviourExit.runSeek(
 					occurrence.body.position, 

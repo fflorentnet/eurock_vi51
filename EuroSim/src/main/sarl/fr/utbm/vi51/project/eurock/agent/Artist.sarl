@@ -25,11 +25,13 @@ agent Artist extends AbstractAnimat {
 	
 	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
 
-	var fleeBehaviour : FleeBehaviour	// To escape the bomb
-	var seekBehaviourExit : SeekBehaviour	// To search the exit
+	var fleeBehaviour : FleeBehaviour				// To escape the bomb
+	var seekBehaviourExit : SeekBehaviour			// To search the exit
 	var seekBehaviourEntryScene : SeekBehaviour;	// To enter on scene
 	var seekBehaviourBackStage : SeekBehaviour;		// To go behind the scene when the concert is finish
-	var alertBehaviour : AlertBehaviour; // To alert the others when he is alerted (spreading the alert)	
+	var alertBehaviour : AlertBehaviour; 			// To alert the others when he is alerted (spreading the alert)	
+	
+	val ALERT_RADIUS = 5f;
 	
 	/* The agent is on the scene */
 	on Initialize{
@@ -48,10 +50,7 @@ agent Artist extends AbstractAnimat {
 		if (target === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
-					occurrence.body.position,
-					occurrence.body.currentLinearSpeed,
-					occurrence.body.maxLinear,
-					target.position
+					ALERT_RADIUS
 				),
 				new TypeChangeInfluence("ESCAPING")
 			)	

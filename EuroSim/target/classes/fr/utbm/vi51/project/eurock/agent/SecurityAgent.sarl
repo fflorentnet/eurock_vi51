@@ -13,6 +13,9 @@ import fr.utbm.info.vi51.framework.math.MathUtil;
 import fr.utbm.info.vi51.framework.environment.SimulationAgentReady
 import fr.utbm.info.vi51.framework.environment.PerceptionEvent
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
+import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour
 
 /**
  * @author Thomas
@@ -26,18 +29,22 @@ agent SecurityAgent extends AbstractAnimat {
 	val WANDER_CIRCLE_DISTANCE = 20f
 	val WANDER_CIRCLE_RADIUS = 10f
 	val WANDER_MAX_ROTATION = MathUtil.PI/4f
-
-	var wanderBehaviour : SteeringWanderBehaviour;
+	val ALERT_RADIUS = 5f;
+	var seekBehaviourBomb : SeekBehaviour;	// To go to the bomb to defuse it
+	var wanderBehaviour : SteeringWanderBehaviour; 
+	var alertBehaviour : AlertBehaviour;
 	
 	/* The agent is on the scene */
 	on Initialize{
 		super._handle_Initialize_0(occurrence)
+		this.seekBehaviourBomb = new SteeringSeekBehaviour;
 		this.wanderBehaviour = new SteeringWanderBehaviour(
 					WANDER_CIRCLE_DISTANCE, 
 					WANDER_CIRCLE_RADIUS, 
 					WANDER_MAX_ROTATION,
 					STOP_RADIUS,
-					SLOW_RADIUS)
+					SLOW_RADIUS);
+		this.alertBehaviour = new AlertBehaviour;
 		emit(new SimulationAgentReady)
 	}
 	
@@ -56,8 +63,23 @@ agent SecurityAgent extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("BODY")
 			)
+		} else if (target === "ALERT") {
+			emitInfluence(
+				this.alertBehaviour.runAlert(
+					ALERT_RADIUS
+				),
+				new TypeChangeInfluence("ALERTING")
+			)
 		} else if (target === "BOMB") {
-			
+			emitInfluence(
+				this.seekBehaviourBomb.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("DEFUSING")
+			)			
 			/* COMMUNIQUER L'ALERTE AUX AUTRES -> COMMENT FAIRE ? */
 		}
 	}
