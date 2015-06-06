@@ -1,15 +1,13 @@
 package fr.utbm.vi51.project.eurock;
 
 import io.sarl.lang.core.Agent;
-import fr.utbm.info.vi51.framework.FrameworkLauncher;
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.gui.BehaviorTypeSelector;
-import fr.utbm.info.vi51.framework.gui.FrameworkGUI;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.Frame.Window;
 import fr.utbm.vi51.project.eurock.environment.WorldModel;
-import fr.utbm.vi51.project.eurock.GUI.*;;
 
 public class MainProgram {
 
@@ -28,10 +26,10 @@ public class MainProgram {
 
 		System.out.println(LocalizedString.getString(MainProgram.class, "INTRO_MESSAGE")); //$NON-NLS-1$
 
-		DynamicType type = BehaviorTypeSelector.open();
+		/*DynamicType type = BehaviorTypeSelector.open();
 		if (type == null) {
 			System.exit(0);
-		}
+		}*/
 
 		WorldModel environment = new WorldModel(WORLD_SIZE_X, WORLD_SIZE_Y);
 
@@ -45,13 +43,15 @@ public class MainProgram {
 			environment.createSecurityAgent();
 		}
 
-		FrameworkGUI gui = null; //new GUI(WORLD_SIZE_X, WORLD_SIZE_Y, environment.getTimeManager());
+		//FrameworkGUI gui = null; //new GUI(WORLD_SIZE_X, WORLD_SIZE_Y, environment.getTimeManager());
 
-		FrameworkLauncher.launchSimulation(
+		/*FrameworkLauncher.launchSimulation(
 				environment,
 				new ApplicationMapping(),
 				type,
-				gui);
+				gui);*/
+		Window w = Window.getInstance();
+		
 	}
 
 	/**
