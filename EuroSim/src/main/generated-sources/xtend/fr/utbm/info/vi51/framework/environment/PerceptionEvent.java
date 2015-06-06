@@ -17,10 +17,13 @@ public class PerceptionEvent extends Event {
   
   public final TimePercept time;
   
-  public final List<Percept> perceptions;
+  public final List<Percept> perceptionsView;
   
-  public PerceptionEvent(final List<Percept> p, final Percept b, final TimePercept t) {
-    this.perceptions = p;
+  public final List<Percept> perceptionsAlert;
+  
+  public PerceptionEvent(final List<Percept> p, final List<Percept> pAlert, final Percept b, final TimePercept t) {
+    this.perceptionsView = p;
+    this.perceptionsAlert = pAlert;
     this.body = b;
     this.time = t;
   }
@@ -47,10 +50,15 @@ public class PerceptionEvent extends Event {
         return false;
     } else if (!this.time.equals(other.time))
       return false;
-    if (this.perceptions == null) {
-      if (other.perceptions != null)
+    if (this.perceptionsView == null) {
+      if (other.perceptionsView != null)
         return false;
-    } else if (!this.perceptions.equals(other.perceptions))
+    } else if (!this.perceptionsView.equals(other.perceptionsView))
+      return false;
+    if (this.perceptionsAlert == null) {
+      if (other.perceptionsAlert != null)
+        return false;
+    } else if (!this.perceptionsAlert.equals(other.perceptionsAlert))
       return false;
     return true;
   }
@@ -62,7 +70,8 @@ public class PerceptionEvent extends Event {
     int result = super.hashCode();
     result = prime * result + ((this.body== null) ? 0 : this.body.hashCode());
     result = prime * result + ((this.time== null) ? 0 : this.time.hashCode());
-    result = prime * result + ((this.perceptions== null) ? 0 : this.perceptions.hashCode());
+    result = prime * result + ((this.perceptionsView== null) ? 0 : this.perceptionsView.hashCode());
+    result = prime * result + ((this.perceptionsAlert== null) ? 0 : this.perceptionsAlert.hashCode());
     return result;
   }
   
@@ -74,10 +83,11 @@ public class PerceptionEvent extends Event {
     StringBuilder result = new StringBuilder(super.attributesToString());
     result.append("body  = ").append(this.body);
     result.append("time  = ").append(this.time);
-    result.append("perceptions  = ").append(this.perceptions);
+    result.append("perceptionsView  = ").append(this.perceptionsView);
+    result.append("perceptionsAlert  = ").append(this.perceptionsAlert);
     return result.toString();
   }
   
   @Generated
-  private final static long serialVersionUID = 3681047883L;
+  private final static long serialVersionUID = 1735882398L;
 }

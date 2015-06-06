@@ -170,8 +170,9 @@ public class EnvironmentAgent extends Agent {
       {
         run = true;
         List<fr.utbm.info.vi51.framework.environment.Percept> _perceivedObjects = body.getPerceivedObjects();
+        List<fr.utbm.info.vi51.framework.environment.Percept> _perceivedObjects_1 = body.getPerceivedObjects();
         fr.utbm.info.vi51.framework.environment.Percept _percept = new fr.utbm.info.vi51.framework.environment.Percept(body);
-        PerceptionEvent event = new PerceptionEvent(_perceivedObjects, _percept, timePercept);
+        PerceptionEvent event = new PerceptionEvent(_perceivedObjects, _perceivedObjects_1, _percept, timePercept);
         event.setSource(this.myAdr);
         UUID _iD = body.getID();
         AddressUUIDScope _addressUUIDScope = new AddressUUIDScope(_iD);

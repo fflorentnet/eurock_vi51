@@ -30,9 +30,11 @@ import java.util.List
 event PerceptionEvent {
 	val body : Percept
 	val time : TimePercept
-	val perceptions : List<Percept>
-	new (p : List<Percept>, b : Percept, t : TimePercept) {
-		this.perceptions = p
+	val perceptionsView : List<Percept>
+	val perceptionsAlert : List<Percept>
+	new (p : List<Percept>,pAlert : List<Percept>, b : Percept, t : TimePercept) {
+		this.perceptionsView = p
+		this.perceptionsAlert = pAlert
 		this.body = b
 		this.time = t
 	}

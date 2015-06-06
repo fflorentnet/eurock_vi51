@@ -57,13 +57,13 @@ agent Spectator extends AbstractAnimat {
 	}
 	
 	on PerceptionEvent{
-		var target = occurrence.perceptions.first
+		var target = occurrence.perceptionsView.first
 	
 		if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
 					occurrence.body.position,
-					occurrence.perceptions
+					occurrence.perceptionsView
 				),
 				new TypeChangeInfluence("ALERTED")
 			)	

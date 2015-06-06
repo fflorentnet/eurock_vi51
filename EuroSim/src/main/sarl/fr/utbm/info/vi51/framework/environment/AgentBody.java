@@ -44,8 +44,8 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	
 	private transient MotionInfluence motionInfluence = null;
 	private transient List<Influence> otherInfluences = new ArrayList<>();
-	private transient List<Percept> perceptions = new ArrayList<>();
-
+	private transient List<Percept> perceptionsView = new ArrayList<>();
+	private transient List<Percept> perceptionsAlert = new ArrayList<>();
 	/**
 	 * @param id
 	 * @param shape the shape of the body, considering that it is centered at the (0,0) position.
@@ -68,7 +68,8 @@ public class AgentBody extends AbstractMobileObject implements Body {
 		AgentBody clone = (AgentBody) super.clone();
 		clone.motionInfluence = null;
 		clone.otherInfluences = new ArrayList<>();
-		clone.perceptions = new ArrayList<>();
+		clone.perceptionsView = new ArrayList<>();
+		clone.perceptionsAlert = new ArrayList<>();
 		return clone;
 	}
 
@@ -199,7 +200,15 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 * @return the perceived objects.
 	 */
 	public List<Percept> getPerceivedObjects() {
-		return this.perceptions;
+		return this.perceptionsView;
+	}
+	
+	/** Replies all the perceived objects.
+	 * 
+	 * @return the perceived objects.
+	 */
+	public List<Percept> getPerceivedObjectsAlert() {
+		return this.perceptionsAlert;
 	}
 
 	/** Replies the influence.
@@ -230,9 +239,20 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 * 
 	 * @param perceptions
 	 */
-	void setPerceptions(List<Percept> perceptions) {
+	void setPerceptionsView(List<Percept> perceptions) {
 		assert(perceptions!=null);
-		this.perceptions = perceptions;
+		this.perceptionsView = perceptions;
 	}
+	
+	
+	/** Set the perceptions.
+	 * 
+	 * @param perceptions
+	 */
+	void setPerceptionsAlert(List<Percept> perceptions) {
+		assert(perceptions!=null);
+		this.perceptionsAlert = perceptions;
+	}
+
 
 }
