@@ -3,9 +3,9 @@ package fr.utbm.vi51.project.eurock.tree4d;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.utbm.vi51.framework.environment.ShapedObject;
-import fr.utbm.vi51.framework.math.Point2f;
-import fr.utbm.vi51.framework.math.Rectangle2f;
+import fr.utbm.info.vi51.framework.environment.ShapedObject;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
 
 public class QuadTreeNode<D extends ShapedObject> {
 	List<D> lData;
