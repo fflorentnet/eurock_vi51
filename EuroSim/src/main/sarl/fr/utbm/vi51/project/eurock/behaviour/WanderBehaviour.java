@@ -4,6 +4,10 @@ import java.util.Random;
 
 import fr.utbm.vi51.framework.math.Point2f;
 import fr.utbm.vi51.framework.math.Vector2f;
+import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
  * Comportement direction aléatoire
@@ -15,9 +19,10 @@ public class WanderBehaviour implements Behaviour {
 	private final Random random = new Random();
 	
 	@Override
-	public Vector2f runBehavior(Point2f position, float maxlinearSpeed,
+	public BehaviourOutput runBehavior(Point2f position, float maxlinearSpeed,
 			float maxAcceleration,float maxAngularSpeed, Vector2f currentLinearSpeed, Point2f target) {
 
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
 		
 		Vector2f direction = currentLinearSpeed;
 		direction.setLength(maxlinearSpeed);
@@ -36,7 +41,7 @@ public class WanderBehaviour implements Behaviour {
 		float randAngle = (float) this.random.nextGaussian() * maxAngularSpeed;
 		direction.setOrientationAngle(randAngle);
 		
-		return direction;
+		return output;
 
 	}
 

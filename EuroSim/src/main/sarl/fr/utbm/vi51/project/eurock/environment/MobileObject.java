@@ -1,6 +1,7 @@
 package fr.utbm.vi51.project.eurock.environment;
 
 import fr.utbm.vi51.framework.math.Vector2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 
 public class MobileObject extends WorldObject {
@@ -14,6 +15,8 @@ public class MobileObject extends WorldObject {
 	private float maxAngularSpeed;
 
 	private float maxAcceleration;
+	
+	private State state;	
 	
 	public Vector2f getCurrentLinearSpeed() {
 		return currentLinearSpeed;

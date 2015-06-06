@@ -2,6 +2,8 @@ package fr.utbm.vi51.project.eurock.environment;
 
 import fr.utbm.vi51.framework.math.Point2f;
 import fr.utbm.vi51.project.eurock.frustrum.Shape;
+
+import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.vi51.project.eurock.semantics.Semantics;
 
 /**
@@ -13,7 +15,7 @@ public class WorldObject {
 
 	private Point2f position;
 
-	private Enum state;
+	private Enum<?> state;
 
 	private Semantics[] semantics;
 
@@ -27,11 +29,11 @@ public class WorldObject {
 		this.position = position;
 	}
 
-	public Enum getState() {
+	public Enum<?> getState() {
 		return state;
 	}
 
-	public void setState(Enum state) {
+	public void setState(Enum<?> state) {
 		this.state = state;
 	}
 
