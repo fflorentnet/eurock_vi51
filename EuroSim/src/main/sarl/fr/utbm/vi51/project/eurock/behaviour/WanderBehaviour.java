@@ -20,11 +20,9 @@
  */
 package fr.utbm.vi51.project.eurock.behaviour;
 
-<<<<<<< HEAD
-=======
+
 import java.util.Random;
 
->>>>>>> refs/heads/Thomas
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;

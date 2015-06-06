@@ -9,7 +9,7 @@ import fr.utbm.info.vi51.framework.gui.FrameworkGUI;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
 import fr.utbm.vi51.project.eurock.environment.WorldModel;
-import fr.utbm.vi51.project.eurock.gui.GUI;
+import fr.utbm.vi51.project.eurock.GUI.*;;
 
 public class MainProgram {
 
