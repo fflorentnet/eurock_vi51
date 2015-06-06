@@ -50,7 +50,9 @@ agent Artist extends AbstractAnimat {
 		if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
-					ALERT_RADIUS
+					occurrence.body.position,
+					occurrence.body.orientation,
+					occurrence.body.
 				),
 				new TypeChangeInfluence("SCARED")
 			)	

@@ -12,6 +12,6 @@ import fr.utbm.info.vi51.framework.math.Vector2f;
 
 public interface ArrivingBehaviour {
 
-	public BehaviourOutput runArriving(Point2f position, Vector2f velocity, Point2f target, float maxLinearAcc, float maxLinearSpeed, float targetRadius, float slowRadius);
+	public BehaviourOutput runArriving(Point2f position, Vector2f velocity, Point2f target, float maxLinearAcc, float maxLinearSpeed);
 	
 }

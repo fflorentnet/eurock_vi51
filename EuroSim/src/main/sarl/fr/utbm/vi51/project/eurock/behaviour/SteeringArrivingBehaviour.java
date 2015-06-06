@@ -12,12 +12,29 @@ import fr.utbm.info.vi51.framework.math.Vector2f;
  */
 
 public class SteeringArrivingBehaviour implements ArrivingBehaviour{
-	@Override
-	public BehaviourOutput runArriving(Point2f position, Vector2f velocity, Point2f target, float maxLinearAcc, float maxLinearSpeed, float targetRadius, float slowRadius) {
+	
+	private static final float timeToTarget = 0.2f;
+	
+	private final float targetRadius; 
+	private final float slowRadius; 
+	
+	/**
+	 * @param targetRadius is the radius of the finish circle
+	 * @param slowRadius is the radius of the circle where the agent begins to slow
+	 */
+	
+	public SteeringArrivingBehaviour (float targetRadius, float slowRadius){
+		assert (targetRadius < slowRadius);
+		this.targetRadius = targetRadius;
+		this.slowRadius = slowRadius;
+		
+	}
+	
+	public BehaviourOutput runArriving(Point2f position, Vector2f velocity, Point2f target, float maxLinearAcc, float maxLinearSpeed) {
 		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
 		float targetSpeed;
 		float distance;
-		float timeToTarget = 0.1f;
+		//float timeToTarget = 0.1f;
 		Vector2f outputLinear;
 		Vector2f targetVelocity;
 		
