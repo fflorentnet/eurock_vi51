@@ -27,7 +27,7 @@ public class AlertBehaviour {
 		
 		
 		
-		BehaviourOutput output;
+		BehaviourOutput output = null;
 	
 		
 		return output;

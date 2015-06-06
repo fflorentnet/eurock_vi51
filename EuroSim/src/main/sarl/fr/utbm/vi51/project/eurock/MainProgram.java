@@ -45,7 +45,7 @@ public class MainProgram {
 			environment.createSecurityAgent();
 		}
 
-		FrameworkGUI gui = new GUI(WORLD_SIZE_X, WORLD_SIZE_Y, environment.getTimeManager());
+		FrameworkGUI gui = null; //new GUI(WORLD_SIZE_X, WORLD_SIZE_Y, environment.getTimeManager());
 
 		FrameworkLauncher.launchSimulation(
 				environment,

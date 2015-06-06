@@ -19,7 +19,14 @@ public class Window extends AbstractFrame {
 	/**
 	 * 
 	 */
-	public Window(String title, int h, int w) {
+	private static Window instance = null;
+	public static Window getInstance()
+	{
+		if (instance == null)
+			instance = new Window("EurockSims",700,700);
+		return instance;
+	}
+	private Window(String title, int h, int w) {
 		super(title, h, w);
 		int wx, wy;
 		wx = 800;

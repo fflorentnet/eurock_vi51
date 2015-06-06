@@ -3,12 +3,10 @@ package fr.utbm.vi51.project.eurock.GUI.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
 
-import fr.utbm.vi51.project.eurock.GUI.Graphics.CardinalSystem;
-
 /**
  * 
  */
-public class AddBusButton extends ButtonComponent {
+public class AddAgentButton extends ButtonComponent {
 
 	/**
 	 * 
@@ -18,8 +16,8 @@ public class AddBusButton extends ButtonComponent {
 	/**
 	 * 
 	 */
-	public AddBusButton(String text, int x, int y, int h, int w, CardinalSystem p) {
-		super(text, x, y, h, w, p);
+	public AddAgentButton(String text, int x, int y, int h, int w) {
+		super(text, x, y, h, w);
 	}
 
 	@Override

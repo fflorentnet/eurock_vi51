@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractComponent;
-import fr.utbm.vi51.project.eurock.GUI.Graphics.CardinalSystem;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.AbstractLayout;
 
 
@@ -26,7 +25,6 @@ public abstract class ButtonComponent extends AbstractComponent {
 	protected List<AbstractLayout<?>> m;
 	protected Rectangle bounds;
 	private JButton button;
-	protected CardinalSystem placement;
 	private void init() {
 		this.button.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
@@ -40,22 +38,9 @@ public abstract class ButtonComponent extends AbstractComponent {
     	this.bounds = new Rectangle(x, y, h, w);
     	this.button.setSize(w,h);
     	this.button.setBounds(this.bounds);
-    	this.placement = CardinalSystem.NORTHEAST;
     	this.m = new ArrayList<AbstractLayout<?>>();
     	init();
     }
-	    
-	public ButtonComponent(String text, int x, int y, int h, int w, CardinalSystem p) {
-    	this.button = new GraphicButton(text);
-    	this.button.setText(text);
-    	this.bounds = new Rectangle(x, y, h, w);
-    	this.button.setSize(w,h);
-    	this.button.setBounds(this.bounds);
-    	this.placement = p;
-    	this.m = new ArrayList<AbstractLayout<?>>();
-    	init();
-    }
-
 	public void setLayout(AbstractLayout<?> l)
 	{
 		this.m.add(l);

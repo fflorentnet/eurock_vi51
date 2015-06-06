@@ -44,7 +44,7 @@ agent SecurityAgent extends AbstractAnimat {
 					WANDER_MAX_ROTATION,
 					STOP_RADIUS,
 					SLOW_RADIUS);
-		this.alertBehaviour = new AlertBehaviour;
+		this.alertBehaviour = new AlertBehaviour(3.4F);
 		emit(new SimulationAgentReady)
 	}
 	
