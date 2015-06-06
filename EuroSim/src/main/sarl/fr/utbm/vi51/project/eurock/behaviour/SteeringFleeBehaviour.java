@@ -18,26 +18,33 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * This program is free software; you can redistribute it and/or modify
  */
-package fr.utbm.vi51.project.eurock.behaviour2;
+package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
+import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
- * Alignment Behaviour.
+ * Steering Flee Behaviour.
  * 
  * @author St&eacute;phane GALLAND &lt;stephane.galland@utbm.fr&gt;
  * @version $Name$ $Revision$ $Date$
  */
-public interface AlignBehaviour {
+public class SteeringFleeBehaviour implements FleeBehaviour {
 
 	/**
-	 * @param orientation is the current orientation of the entity.
-	 * @param angularSpeed is the current angular speed of the entity.
-	 * @param maxAngular is the maximal angular speed or acceleration (depending on getType()) of the entity.
-	 * @param target is the vector to match.
-	 * @return the behaviour output.
+	 * {@inheritDoc}
 	 */
-	public BehaviourOutput runAlign(Vector2f orientation, float angularSpeed, float maxAngular, Vector2f target);
+	public BehaviourOutput runFlee(Point2f position, float linearSpeed, float maxLinearAcc, Point2f target) {
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
+		
+		Vector2f direction = position.operator_minus(target);
+		direction.setLength(maxLinearAcc);
+		
+		output.setLinear(direction);
+		
+		return output;
+	}
 	
 }

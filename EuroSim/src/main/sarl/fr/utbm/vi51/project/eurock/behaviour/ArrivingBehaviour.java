@@ -1,4 +1,4 @@
-package fr.utbm.vi51.project.eurock.behaviour2;
+package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
 import fr.utbm.info.vi51.framework.math.Point2f;

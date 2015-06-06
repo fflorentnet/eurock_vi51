@@ -18,38 +18,33 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * This program is free software; you can redistribute it and/or modify
  */
-package fr.utbm.vi51.project.eurock.behaviour2;
+package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
- * Steering Face Behaviour.
+ * Steering Seek Behaviour.
  * 
  * @author St&eacute;phane GALLAND &lt;stephane.galland@utbm.fr&gt;
  * @version $Name$ $Revision$ $Date$
  */
-public class SteeringFaceBehaviour implements FaceBehaviour {
+public class SteeringSeekBehaviour implements SeekBehaviour {
 
-	private final SteeringAlignBehaviour alignBehaviour;
-
-	/**
-	 * @param stopRadius is the angle between the current direction and the target direction
-	 * under which the rotation for alignment is ignored.
-	 * @param decelerateRadius is the angle between the current direction and the target direction
-	 * under which the rotation is going slower.
-	 */
-	public SteeringFaceBehaviour(float stopRadius, float decelerateRadius) {
-		this.alignBehaviour = new SteeringAlignBehaviour(stopRadius, decelerateRadius);
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
-	public BehaviourOutput runFace(Point2f position, Vector2f orientation, float angularSpeed, float maxAngularAcc, Point2f target) {
-		return this.alignBehaviour.runAlign(orientation, angularSpeed, maxAngularAcc,
-				target.operator_minus(position));
+	public BehaviourOutput runSeek(Point2f position, float linearSpeed, float maxLinearAcc, Point2f target) {
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
+		
+		Vector2f direction = target.operator_minus(position);
+		direction.setLength(maxLinearAcc);
+		
+		output.setLinear(direction);
+		
+		return output;
 	}
 	
 }

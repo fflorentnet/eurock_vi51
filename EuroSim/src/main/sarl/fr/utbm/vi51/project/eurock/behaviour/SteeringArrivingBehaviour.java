@@ -1,9 +1,15 @@
-package fr.utbm.vi51.project.eurock.behaviour2;
+package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
+
+/**
+ * Arriving Behaviour.
+ * 
+ * @author Nicolas
+ */
 
 public class SteeringArrivingBehaviour implements ArrivingBehaviour{
 	@Override

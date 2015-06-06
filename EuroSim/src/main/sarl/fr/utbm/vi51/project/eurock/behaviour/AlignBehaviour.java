@@ -18,26 +18,26 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * This program is free software; you can redistribute it and/or modify
  */
-package fr.utbm.vi51.project.eurock.behaviour2;
+package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
-import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
- * Seek Behavior.
+ * Alignment Behaviour.
  * 
  * @author St&eacute;phane GALLAND &lt;stephane.galland@utbm.fr&gt;
  * @version $Name$ $Revision$ $Date$
  */
-public interface SeekBehaviour {
+public interface AlignBehaviour {
 
 	/**
-	 * @param position is the current position of the entity.
-	 * @param linearSpeed is the current linear speed of the entity.
-	 * @param maxLinear is the maximal linear speed or acceleration (depending on getType()) of the entity.
-	 * @param target is the point to reach.
+	 * @param orientation is the current orientation of the entity.
+	 * @param angularSpeed is the current angular speed of the entity.
+	 * @param maxAngular is the maximal angular speed or acceleration (depending on getType()) of the entity.
+	 * @param target is the vector to match.
 	 * @return the behaviour output.
 	 */
-	public BehaviourOutput runSeek(Point2f position, float linearSpeed, float maxLinear, Point2f target);
+	public BehaviourOutput runAlign(Vector2f orientation, float angularSpeed, float maxAngular, Vector2f target);
 	
 }
