@@ -2,8 +2,6 @@ package fr.utbm.vi51.project.eurock.frustrum;
 
 import java.util.List;
 
-import fr.utbm.vi51.framework.math.Point2f;
-import fr.utbm.vi51.framework.math.Vector2f;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
 

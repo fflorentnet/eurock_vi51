@@ -8,10 +8,8 @@ import fr.utbm.info.vi51.framework.gui.BehaviorTypeSelector;
 import fr.utbm.info.vi51.framework.gui.FrameworkGUI;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
-import fr.utbm.vi51.project.eurock.agent.Artist;
-import fr.utbm.vi51.project.eurock.agent.SecurityAgent;
-import fr.utbm.vi51.project.eurock.agent.Spectator;
 import fr.utbm.vi51.project.eurock.environment.WorldModel;
+import fr.utbm.vi51.project.eurock.gui.GUI;
 
 public class MainProgram {
 
