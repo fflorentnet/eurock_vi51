@@ -24,7 +24,6 @@ import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
-import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour;
 
 /**
  * Steering Seek Behaviour.

@@ -22,6 +22,8 @@ package fr.utbm.vi51.framework.environment;
 
 import java.util.UUID;
 
+import fr.utbm.info.vi51.framework.time.TimeManager;
+
 /**
  * Situated environment.  
  * 

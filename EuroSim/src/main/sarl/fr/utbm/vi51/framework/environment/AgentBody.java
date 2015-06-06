@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import fr.utbm.info.vi51.framework.util.LocalizedString;
 import fr.utbm.vi51.framework.math.MathUtil;
 import fr.utbm.vi51.framework.math.Shape2f;
 import fr.utbm.vi51.framework.math.Vector2f;

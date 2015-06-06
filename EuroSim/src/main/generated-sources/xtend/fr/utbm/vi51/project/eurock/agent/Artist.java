@@ -1,16 +1,5 @@
 package fr.utbm.vi51.project.eurock.agent;
 
-import fr.utbm.info.vi51.framework.agent.AbstractAnimat;
-import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
-import fr.utbm.info.vi51.framework.environment.PerceptionEvent;
-import fr.utbm.info.vi51.framework.environment.SimulationAgentReady;
-import fr.utbm.info.vi51.framework.math.Point2f;
-import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour;
-import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour;
-import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour;
-import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour;
-import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour;
-import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence;
 import io.sarl.core.AgentSpawned;
 import io.sarl.core.DefaultContextInteractions;
 import io.sarl.core.Initialize;
@@ -26,8 +15,21 @@ import io.sarl.lang.core.Percept;
 import io.sarl.lang.core.Scope;
 import io.sarl.lang.core.Space;
 import io.sarl.lang.core.SpaceID;
+
 import java.io.Serializable;
 import java.util.UUID;
+
+import fr.utbm.info.vi51.framework.agent.AbstractAnimat;
+import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.PerceptionEvent;
+import fr.utbm.info.vi51.framework.environment.SimulationAgentReady;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour;
+import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence;
 
 /**
  * @author Thomas

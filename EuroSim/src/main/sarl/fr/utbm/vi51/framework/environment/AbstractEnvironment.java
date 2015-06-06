@@ -29,6 +29,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import fr.utbm.info.vi51.framework.time.TimeManager;
 import fr.utbm.vi51.framework.math.Point2f;
 import fr.utbm.vi51.framework.math.Vector2f;
 
