@@ -3,8 +3,6 @@ package fr.utbm.vi51.project.eurock.GUI.Graphics.Layout;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;

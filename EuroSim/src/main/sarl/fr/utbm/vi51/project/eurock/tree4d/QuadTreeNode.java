@@ -3,9 +3,9 @@ package fr.utbm.vi51.project.eurock.tree4d;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.utbm.vi51.framework.environment.ShapedObject;
-import fr.utbm.vi51.framework.math.Point2f;
-import fr.utbm.vi51.framework.math.Rectangle2f;
+import fr.utbm.info.vi51.framework.environment.ShapedObject;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
 
 public class QuadTreeNode<D extends ShapedObject> {
 	List<D> lData;
@@ -20,7 +20,7 @@ public class QuadTreeNode<D extends ShapedObject> {
 	private static int RIGHTBOTTOM = 0;
 	
 
-	// Création du root (parent = null)
+	// Crï¿½ation du root (parent = null)
 	public QuadTreeNode(Rectangle2f r) {
 		bounds = r;
 		lData = new ArrayList<D>();
@@ -49,8 +49,8 @@ public class QuadTreeNode<D extends ShapedObject> {
 			Point2f Upper = bounds.getUpper();
 			Point2f Center = bounds.getCenter();
 
-			// Le noeud est une feuille avec des données:
-			// -> Il faut créer les fils
+			// Le noeud est une feuille avec des donnï¿½es:
+			// -> Il faut crï¿½er les fils
 			if (lData.isEmpty())
 			{
 				children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));

@@ -2,10 +2,10 @@ package fr.utbm.vi51.project.eurock.tree4d;
 
 import java.util.Iterator;
 
-import fr.utbm.vi51.framework.environment.ShapedObject;
-import fr.utbm.vi51.framework.environment.SpatialDataStructure;
-import fr.utbm.vi51.framework.math.Rectangle2f;
-import fr.utbm.vi51.framework.math.Shape2f;
+import fr.utbm.info.vi51.framework.environment.ShapedObject;
+import fr.utbm.info.vi51.framework.environment.SpatialDataStructure;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
+import fr.utbm.info.vi51.framework.math.Shape2f;
 
 public class QuadTree <D extends ShapedObject> implements SpatialDataStructure<D>/*, Iterable<QuadTreeNode<D> > */ {
 
@@ -51,7 +51,7 @@ public class QuadTree <D extends ShapedObject> implements SpatialDataStructure<D
 		return root;
 	}
 
-	// retourne true si la valeur a bien été supprimée
+	// retourne true si la valeur a bien ï¿½tï¿½ supprimï¿½e
 	public boolean removeData(D data) {
 		return root.remove(data);
 	}

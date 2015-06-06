@@ -52,7 +52,6 @@ agent Artist extends AbstractAnimat {
 				this.alertBehaviour.runAlert(
 					occurrence.body.position,
 					occurrence.body.orientation,
-					occurrence.body.
 				),
 				new TypeChangeInfluence("SCARED")
 			)	

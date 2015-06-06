@@ -1,8 +1,8 @@
 package fr.utbm.vi51.project.eurock.behaviour;
 
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
-import fr.utbm.info.vi51.framework.math.Vector2f;
 import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
  * @author Nicolas
@@ -26,7 +26,7 @@ public class AlertBehaviour {
 		BehaviourOutput output;
 		
 		// Calculate the circle center
-		//Vector2f circleCenter = orientation.toColinearVector(alertRadius);
+		// Vector2f circleCenter = orientation.toColinearVector(alertRadius);
 		
 		return output;
 	}
