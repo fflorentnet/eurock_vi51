@@ -62,9 +62,10 @@ agent Spectator extends AbstractAnimat {
 		if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
-					ALERT_RADIUS
+					occurrence.body.position,
+					occurrence.perceptions
 				),
-				new TypeChangeInfluence("SCARED")
+				new TypeChangeInfluence("ALERTED")
 			)	
 		} else if (target.type === "EXIT") {
 			emitInfluence(

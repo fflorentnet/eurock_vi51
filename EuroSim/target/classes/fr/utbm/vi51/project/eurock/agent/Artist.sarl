@@ -40,7 +40,7 @@ agent Artist extends AbstractAnimat {
 		this.seekBehaviourEntryScene = new SteeringSeekBehaviour;
 		this.seekBehaviourBackStage = new SteeringSeekBehaviour;
 		this.fleeBehaviour = new SteeringFleeBehaviour; 
-		this.alertBehaviour = new AlertBehaviour;
+		this.alertBehaviour = new AlertBehaviour(ALERT_RADIUS);
 		emit(new SimulationAgentReady)
 	}
 	
@@ -51,9 +51,9 @@ agent Artist extends AbstractAnimat {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
 					occurrence.body.position,
-					occurrence.body.orientation,
+					occurrence.perceptions
 				),
-				new TypeChangeInfluence("SCARED")
+				new TypeChangeInfluence("ALERTED")
 			)	
 		} else if (target.type === "EXIT") {
 			emitInfluence(

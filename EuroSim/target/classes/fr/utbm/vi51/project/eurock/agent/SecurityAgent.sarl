@@ -66,10 +66,11 @@ agent SecurityAgent extends AbstractAnimat {
 		} else if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
-					ALERT_RADIUS
+					occurrence.body.position,
+					occurrence.perceptions
 				),
-				new TypeChangeInfluence("ALERTING")
-			)
+				new TypeChangeInfluence("ALERTED")
+			)	
 		} else if (target.type === "BOMB") {
 			emitInfluence(
 				this.seekBehaviourBomb.runSeek(

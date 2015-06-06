@@ -1,8 +1,10 @@
 package fr.utbm.vi51.project.eurock.behaviour;
 
+import java.util.List;
+
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.Percept;
 import fr.utbm.info.vi51.framework.math.Point2f;
-import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
  * @author Nicolas
@@ -21,7 +23,9 @@ public class AlertBehaviour {
 		this.alertRadius = alertRadius;
 	}
 	
-	public BehaviourOutput runAlert(Point2f position, Vector2f orientation) {
+	public BehaviourOutput runAlert(Point2f position, List<Percept> perceptions) {
+		
+		
 		
 		BehaviourOutput output;
 		
