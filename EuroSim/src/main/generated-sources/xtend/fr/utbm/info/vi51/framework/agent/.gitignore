@@ -1,6 +1,14 @@
 /.AbstractAnimat.java._trace
+<<<<<<< HEAD
 /.PhysicEnvironment.java._trace
 /.StandardPhysicEnvironment.java._trace
 /AbstractAnimat.java
 /PhysicEnvironment.java
 /StandardPhysicEnvironment.java
+=======
+/.StandardPhysicEnvironment.java._trace
+/AbstractAnimat.java
+/StandardPhysicEnvironment.java
+/.PhysicEnvironment.java._trace
+/PhysicEnvironment.java
+>>>>>>> refs/heads/Thomas

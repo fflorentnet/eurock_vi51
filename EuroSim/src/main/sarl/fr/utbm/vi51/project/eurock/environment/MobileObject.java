@@ -2,7 +2,6 @@ package fr.utbm.vi51.project.eurock.environment;
 
 import fr.utbm.info.vi51.framework.math.Vector2f;
 
-
 public class MobileObject extends WorldObject {
 
 	private Vector2f currentLinearSpeed;

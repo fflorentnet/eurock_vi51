@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 /.Artist.java._trace
 /.SecurityAgent.java._trace
 /.Spectator.java._trace
 /Artist.java
 /SecurityAgent.java
 /Spectator.java
+=======
+/.Spectator.java._trace
+/Spectator.java
+/.Artist.java._trace
+/.SecurityAgent.java._trace
+/Artist.java
+/SecurityAgent.java
+>>>>>>> refs/heads/Thomas
