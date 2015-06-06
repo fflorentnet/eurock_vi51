@@ -60,14 +60,14 @@ agent Spectator extends AbstractAnimat {
 	on PerceptionEvent{
 		var target = occurrence.perceptions.first
 	
-		if (target === "ALERT") {
+		if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
 					ALERT_RADIUS
 				),
-				new TypeChangeInfluence("ESCAPING")
+				new TypeChangeInfluence("SCARED")
 			)	
-		} else if (target === "ESCAPE") {
+		} else if (target.type === "EXIT") {
 			emitInfluence(
 				this.seekBehaviourExit.runSeek(
 					occurrence.body.position, 
@@ -75,9 +75,9 @@ agent Spectator extends AbstractAnimat {
 					occurrence.body.maxLinear, 
 					target.position
 				),
-				new TypeChangeInfluence("SCARED")
+				new TypeChangeInfluence("CALM")
 			)	
-		} else if (target === "BOMB") {
+		} else if (target.type === "BOMB") {
 			emitInfluence(
 				this.fleeBehaviour.runFlee(
 					occurrence.body.position,
@@ -87,7 +87,7 @@ agent Spectator extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("SCARED")
 			)
-		} else if (target === "SCENE") {
+		} else if (target.type === "SCENE") {
 			emitInfluence(
 				this.seekBehaviourScene.runSeek(
 					occurrence.body.position, 
@@ -97,7 +97,7 @@ agent Spectator extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("WATCHING")
 			)
-		} else if (target === "STAND") {
+		} else if (target.type === "STAND") {
 			emitInfluence(
 				this.seekBehaviourStand.runSeek(
 					occurrence.body.position, 
@@ -117,7 +117,7 @@ agent Spectator extends AbstractAnimat {
 					occurrence.body.currentAngularSpeed,
 					occurrence.body.maxAngular
 				),
-				new TypeChangeInfluence("WANDERING")
+				new TypeChangeInfluence("CALM")
 			)
 		}
 	}

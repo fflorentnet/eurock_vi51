@@ -26,6 +26,7 @@ import io.sarl.lang.core.Percept;
 import io.sarl.lang.core.Scope;
 import io.sarl.lang.core.Space;
 import io.sarl.lang.core.SpaceID;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -33,13 +34,13 @@ import java.util.UUID;
  */
 @SuppressWarnings("all")
 public class Artist extends AbstractAnimat {
-  protected FleeBehaviour fleeBehaviour;
-  
   protected SeekBehaviour seekBehaviourExit;
   
   protected SeekBehaviour seekBehaviourEntryScene;
   
   protected SeekBehaviour seekBehaviourBackStage;
+  
+  protected FleeBehaviour fleeBehaviour;
   
   protected AlertBehaviour alertBehaviour;
   
@@ -68,22 +69,28 @@ public class Artist extends AbstractAnimat {
   @Percept
   public void _handle_PerceptionEvent_1(final PerceptionEvent occurrence) {
     fr.utbm.info.vi51.framework.environment.Percept target = this.first(occurrence.perceptions);
-    if ((target == "ALERT")) {
+    Serializable _type = target.getType();
+    boolean _tripleEquals = (_type == "ALERT");
+    if (_tripleEquals) {
       BehaviourOutput _runAlert = this.alertBehaviour.runAlert(
         this.ALERT_RADIUS);
-      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("ESCAPING");
+      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("SCARED");
       this.emitInfluence(_runAlert, _typeChangeInfluence);
     } else {
-      if ((target == "ESCAPE")) {
+      Serializable _type_1 = target.getType();
+      boolean _tripleEquals_1 = (_type_1 == "EXIT");
+      if (_tripleEquals_1) {
         Point2f _position = occurrence.body.getPosition();
         float _currentLinearSpeed = occurrence.body.getCurrentLinearSpeed();
         float _maxLinear = this.getMaxLinear(occurrence.body);
         Point2f _position_1 = target.getPosition();
         BehaviourOutput _runSeek = this.seekBehaviourExit.runSeek(_position, _currentLinearSpeed, _maxLinear, _position_1);
-        TypeChangeInfluence _typeChangeInfluence_1 = new TypeChangeInfluence("SCARED");
+        TypeChangeInfluence _typeChangeInfluence_1 = new TypeChangeInfluence("CALM");
         this.emitInfluence(_runSeek, _typeChangeInfluence_1);
       } else {
-        if ((target == "BOMB")) {
+        Serializable _type_2 = target.getType();
+        boolean _tripleEquals_2 = (_type_2 == "BOMB");
+        if (_tripleEquals_2) {
           Point2f _position_2 = occurrence.body.getPosition();
           float _currentLinearSpeed_1 = occurrence.body.getCurrentLinearSpeed();
           float _maxLinear_1 = this.getMaxLinear(occurrence.body);
@@ -92,7 +99,9 @@ public class Artist extends AbstractAnimat {
           TypeChangeInfluence _typeChangeInfluence_2 = new TypeChangeInfluence("SCARED");
           this.emitInfluence(_runFlee, _typeChangeInfluence_2);
         } else {
-          if ((target == "SCENE")) {
+          Serializable _type_3 = target.getType();
+          boolean _tripleEquals_3 = (_type_3 == "SCENE");
+          if (_tripleEquals_3) {
             Point2f _position_4 = occurrence.body.getPosition();
             float _currentLinearSpeed_2 = occurrence.body.getCurrentLinearSpeed();
             float _maxLinear_2 = this.getMaxLinear(occurrence.body);
@@ -101,13 +110,15 @@ public class Artist extends AbstractAnimat {
             TypeChangeInfluence _typeChangeInfluence_3 = new TypeChangeInfluence("PLAYING");
             this.emitInfluence(_runSeek_1, _typeChangeInfluence_3);
           } else {
-            if ((target == "BACKSTAGE")) {
+            Serializable _type_4 = target.getType();
+            boolean _tripleEquals_4 = (_type_4 == "BACKSTAGE");
+            if (_tripleEquals_4) {
               Point2f _position_6 = occurrence.body.getPosition();
               float _currentLinearSpeed_3 = occurrence.body.getCurrentLinearSpeed();
               float _maxLinear_3 = this.getMaxLinear(occurrence.body);
               Point2f _position_7 = target.getPosition();
               BehaviourOutput _runSeek_2 = this.seekBehaviourBackStage.runSeek(_position_6, _currentLinearSpeed_3, _maxLinear_3, _position_7);
-              TypeChangeInfluence _typeChangeInfluence_4 = new TypeChangeInfluence("BACKSTAGE");
+              TypeChangeInfluence _typeChangeInfluence_4 = new TypeChangeInfluence("CALM");
               this.emitInfluence(_runSeek_2, _typeChangeInfluence_4);
             }
           }

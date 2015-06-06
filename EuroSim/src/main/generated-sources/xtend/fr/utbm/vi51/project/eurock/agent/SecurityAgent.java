@@ -28,6 +28,7 @@ import io.sarl.lang.core.Percept;
 import io.sarl.lang.core.Scope;
 import io.sarl.lang.core.Space;
 import io.sarl.lang.core.SpaceID;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -86,16 +87,20 @@ public class SecurityAgent extends AbstractAnimat {
       float _currentAngularSpeed = occurrence.body.getCurrentAngularSpeed();
       float _maxAngular = this.getMaxAngular(occurrence.body);
       BehaviourOutput _runWander = this.wanderBehaviour.runWander(_position, _direction, _currentLinearSpeed, _maxLinear, _currentAngularSpeed, _maxAngular);
-      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("BODY");
+      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("CALM");
       this.emitInfluence(_runWander, _typeChangeInfluence);
     } else {
-      if ((target == "ALERT")) {
+      Serializable _type = target.getType();
+      boolean _tripleEquals = (_type == "ALERT");
+      if (_tripleEquals) {
         BehaviourOutput _runAlert = this.alertBehaviour.runAlert(
           this.ALERT_RADIUS);
         TypeChangeInfluence _typeChangeInfluence_1 = new TypeChangeInfluence("ALERTING");
         this.emitInfluence(_runAlert, _typeChangeInfluence_1);
       } else {
-        if ((target == "BOMB")) {
+        Serializable _type_1 = target.getType();
+        boolean _tripleEquals_1 = (_type_1 == "BOMB");
+        if (_tripleEquals_1) {
           Point2f _position_1 = occurrence.body.getPosition();
           float _currentLinearSpeed_1 = occurrence.body.getCurrentLinearSpeed();
           float _maxLinear_1 = this.getMaxLinear(occurrence.body);

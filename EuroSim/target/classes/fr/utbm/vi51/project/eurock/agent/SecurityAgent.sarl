@@ -61,16 +61,16 @@ agent SecurityAgent extends AbstractAnimat {
 				occurrence.body.currentAngularSpeed,
 				occurrence.body.maxAngular
 				),
-				new TypeChangeInfluence("BODY")
+				new TypeChangeInfluence("CALM")
 			)
-		} else if (target === "ALERT") {
+		} else if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
 					ALERT_RADIUS
 				),
 				new TypeChangeInfluence("ALERTING")
 			)
-		} else if (target === "BOMB") {
+		} else if (target.type === "BOMB") {
 			emitInfluence(
 				this.seekBehaviourBomb.runSeek(
 					occurrence.body.position, 
