@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractComponent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.AbstractGraphicAgent;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding.AbstractGraphicBuilding;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.AbstractLayout;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.MouseManager;
@@ -19,14 +20,14 @@ import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.MouseManager;
 public abstract class AbstractFrame extends JFrame implements IFrame {
 	private static final long serialVersionUID = 1L;
 	protected AbstractLayout<AbstractComponent> gui;
-	protected AbstractLayout<AbstractGraphicElement> map;
+	protected AbstractLayout<AbstractGraphicBuilding> map;
 	protected LayoutAgent<AbstractGraphicAgent> agentLayout;
 	protected JLayeredPane jlp;
 	protected JPanel mainPanel;
 	protected MouseManager mouse;
 //	private int x, y;
 	private int locationX=0, locationY=0;
-	public AbstractFrame(String title, int h,  int w) {
+	protected AbstractFrame(String title, int h,  int w) {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(new Point(this.locationX,this.locationY));
@@ -47,7 +48,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame {
 	{
 		return this.agentLayout;
 	}
-	public AbstractLayout<AbstractGraphicElement> getMap()
+	public AbstractLayout<AbstractGraphicBuilding> getMap()
 	{
 		return this.map;
 	}
@@ -55,7 +56,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame {
 	{
 		return this.gui;
 	}
-	public void addGraphicElement(AbstractGraphicElement c)
+	public void addBuilding(AbstractGraphicBuilding c)
 	{
 		this.map.addComponent(c);
 	}

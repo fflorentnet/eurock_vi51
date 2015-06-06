@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 import fr.utbm.info.vi51.framework.environment.AgentBody;
+import fr.utbm.info.vi51.framework.math.Circle2f;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
@@ -42,7 +43,9 @@ public abstract class AbstractGraphicAgent extends AbstractGraphicElement {
 
     public boolean intersect(Shape2f<?> r)
     {
-    
-    	return r.intersects(this.realAgent.getShape());
+    	if (this.realAgent != null)
+    		return r.intersects(this.realAgent.getShape());
+    	else
+    		return (new Circle2f(pos, 8)).intersects(r);
     }
 }

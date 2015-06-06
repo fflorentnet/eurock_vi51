@@ -3,6 +3,7 @@ package fr.utbm.vi51.project.eurock.GUI.Graphics.Layout;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
@@ -56,6 +57,10 @@ public class LayoutAgent<C extends AbstractGraphicElement> extends AbstractLayou
 	public synchronized void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.scale(this.zoom/100, this.zoom/100);
+		g2d.setRenderingHint(
+				RenderingHints.KEY_ANTIALIASING, 
+				RenderingHints.VALUE_ANTIALIAS_ON);
+
 		for(C c: this.listComponents)
 			c.draw(g);
 

@@ -14,12 +14,13 @@ import fr.utbm.info.vi51.framework.math.Circle2f;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding.AbstractGraphicBuilding;
 
 
 /**
  * 
  */
-public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<C>  {
+public class LayoutMap<C extends AbstractGraphicBuilding> extends AbstractLayout<C>  {
 
 	private static final long serialVersionUID = 1L;
 	private static final int HIT_BOX_SIZE = 2;
