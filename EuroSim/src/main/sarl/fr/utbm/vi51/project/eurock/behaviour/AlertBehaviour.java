@@ -28,9 +28,7 @@ public class AlertBehaviour {
 		
 		
 		BehaviourOutput output;
-		
-		// Calculate the circle center
-		// Vector2f circleCenter = orientation.toColinearVector(alertRadius);
+	
 		
 		return output;
 	}
