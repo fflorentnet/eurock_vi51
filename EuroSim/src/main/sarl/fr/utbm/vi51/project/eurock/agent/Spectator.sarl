@@ -2,21 +2,20 @@
  * 
  */
 package fr.utbm.vi51.project.eurock.^agent
-
 import fr.utbm.info.vi51.framework.^agent.AbstractAnimat
 import fr.utbm.info.vi51.framework.^agent.PhysicEnvironment
 import io.sarl.core.Lifecycle
 import io.sarl.core.DefaultContextInteractions
 import io.sarl.core.Initialize
-import fr.utbm.vi51.project.eurock.behaviour2.SteeringWanderBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.SteeringWanderBehaviour
 import fr.utbm.info.vi51.framework.environment.SimulationAgentReady
 import fr.utbm.info.vi51.framework.environment.PerceptionEvent
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
-import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour
-import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour
-import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour
-import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour
-import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.FleeBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.SeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.AlertBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.SteeringFleeBehaviour
+import fr.utbm.vi51.project.eurock.behaviour.SteeringSeekBehaviour
 import fr.utbm.info.vi51.framework.math.MathUtil;
 
 /**
