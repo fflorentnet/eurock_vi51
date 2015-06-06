@@ -8,6 +8,9 @@ import fr.utbm.info.vi51.framework.environment.SimulationAgentReady;
 import fr.utbm.info.vi51.framework.math.MathUtil;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour;
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour;
 import fr.utbm.vi51.project.eurock.behaviour2.SteeringWanderBehaviour;
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence;
 import io.sarl.core.AgentSpawned;
@@ -25,6 +28,7 @@ import io.sarl.lang.core.Percept;
 import io.sarl.lang.core.Scope;
 import io.sarl.lang.core.Space;
 import io.sarl.lang.core.SpaceID;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -42,7 +46,13 @@ public class SecurityAgent extends AbstractAnimat {
   
   protected final float WANDER_MAX_ROTATION = (MathUtil.PI / 4f);
   
+  protected final float ALERT_RADIUS = 5f;
+  
+  protected SeekBehaviour seekBehaviourBomb;
+  
   protected SteeringWanderBehaviour wanderBehaviour;
+  
+  protected AlertBehaviour alertBehaviour;
   
   /**
    * The agent is on the scene
@@ -50,6 +60,8 @@ public class SecurityAgent extends AbstractAnimat {
   @Percept
   public void _handle_Initialize_0(final Initialize occurrence) {
     super._handle_Initialize_0(occurrence);
+    SteeringSeekBehaviour _steeringSeekBehaviour = new SteeringSeekBehaviour();
+    this.seekBehaviourBomb = _steeringSeekBehaviour;
     SteeringWanderBehaviour _steeringWanderBehaviour = new SteeringWanderBehaviour(
       this.WANDER_CIRCLE_DISTANCE, 
       this.WANDER_CIRCLE_RADIUS, 
@@ -57,6 +69,8 @@ public class SecurityAgent extends AbstractAnimat {
       this.STOP_RADIUS, 
       this.SLOW_RADIUS);
     this.wanderBehaviour = _steeringWanderBehaviour;
+    AlertBehaviour _alertBehaviour = new AlertBehaviour();
+    this.alertBehaviour = _alertBehaviour;
     SimulationAgentReady _simulationAgentReady = new SimulationAgentReady();
     this.emit(_simulationAgentReady);
   }
@@ -73,10 +87,28 @@ public class SecurityAgent extends AbstractAnimat {
       float _currentAngularSpeed = occurrence.body.getCurrentAngularSpeed();
       float _maxAngular = this.getMaxAngular(occurrence.body);
       BehaviourOutput _runWander = this.wanderBehaviour.runWander(_position, _direction, _currentLinearSpeed, _maxLinear, _currentAngularSpeed, _maxAngular);
-      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("BODY");
+      TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("CALM");
       this.emitInfluence(_runWander, _typeChangeInfluence);
     } else {
-      if ((target == "BOMB")) {
+      Serializable _type = target.getType();
+      boolean _tripleEquals = (_type == "ALERT");
+      if (_tripleEquals) {
+        BehaviourOutput _runAlert = this.alertBehaviour.runAlert(
+          this.ALERT_RADIUS);
+        TypeChangeInfluence _typeChangeInfluence_1 = new TypeChangeInfluence("ALERTING");
+        this.emitInfluence(_runAlert, _typeChangeInfluence_1);
+      } else {
+        Serializable _type_1 = target.getType();
+        boolean _tripleEquals_1 = (_type_1 == "BOMB");
+        if (_tripleEquals_1) {
+          Point2f _position_1 = occurrence.body.getPosition();
+          float _currentLinearSpeed_1 = occurrence.body.getCurrentLinearSpeed();
+          float _maxLinear_1 = this.getMaxLinear(occurrence.body);
+          Point2f _position_2 = target.getPosition();
+          BehaviourOutput _runSeek = this.seekBehaviourBomb.runSeek(_position_1, _currentLinearSpeed_1, _maxLinear_1, _position_2);
+          TypeChangeInfluence _typeChangeInfluence_2 = new TypeChangeInfluence("DEFUSING");
+          this.emitInfluence(_runSeek, _typeChangeInfluence_2);
+        }
       }
     }
   }

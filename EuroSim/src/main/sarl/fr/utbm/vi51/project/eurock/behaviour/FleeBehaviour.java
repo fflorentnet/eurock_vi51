@@ -1,7 +1,11 @@
 package fr.utbm.vi51.project.eurock.behaviour;
 
-import fr.utbm.vi51.project.eurock.general.Point2f;
-import fr.utbm.vi51.project.eurock.general.Vector2f;
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Vector2f;
+import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
+import fr.utbm.info.vi51.framework.environment.DynamicType;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 /**
  * Comportement fuir une position
@@ -15,10 +19,11 @@ public class FleeBehaviour implements Behaviour {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Vector2f runBehavior(Point2f position, float maxlinearSpeed,
+	public BehaviourOutput runBehavior(Point2f position, float maxlinearSpeed,
 			float maxAcceleration,float maxAngularSpeed, Vector2f currentLinearSpeed, Point2f target) {
 
-
+		BehaviourOutput output = new BehaviourOutput(DynamicType.STEERING);
+		
 		Vector2f direction = position.operator_minus(target);
 		
 		//Si l'acceleration prévu est trop importante
@@ -34,7 +39,7 @@ public class FleeBehaviour implements Behaviour {
 		
 		//Ajouter la notion de maxAngularSpeed
 		
-		return direction;
+		return output;
 		
 	}
 

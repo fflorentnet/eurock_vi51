@@ -1,8 +1,10 @@
 package fr.utbm.vi51.project.eurock.behaviour;
 
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Vector2f;
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
-import fr.utbm.vi51.project.eurock.general.Point2f;
-import fr.utbm.vi51.project.eurock.general.Vector2f;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 
 

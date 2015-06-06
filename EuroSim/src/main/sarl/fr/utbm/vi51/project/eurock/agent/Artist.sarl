@@ -25,11 +25,13 @@ agent Artist extends AbstractAnimat {
 	
 	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
 
-	var fleeBehaviour : FleeBehaviour	// To escape the bomb
-	var seekBehaviourExit : SeekBehaviour	// To search the exit
-	var seekBehaviourEntryScene : SeekBehaviour;	// To enter on scene
-	var seekBehaviourBackStage : SeekBehaviour;		// To go behind the scene when the concert is finish
-	var alertBehaviour : AlertBehaviour; // To alert the others when he is alerted (spreading the alert)	
+	var seekBehaviourExit : SeekBehaviour			// To search the exit.
+	var seekBehaviourEntryScene : SeekBehaviour;	// To enter on scene.
+	var seekBehaviourBackStage : SeekBehaviour;		// To go behind the scene when the concert is finish.
+	var fleeBehaviour : FleeBehaviour				// To escape the bomb.
+	var alertBehaviour : AlertBehaviour; 			// To alert the others when he is alerted (spreading the alert).
+	
+	val ALERT_RADIUS = 5f;	// RADIUS of the circle of alert.
 	
 	/* The agent is on the scene */
 	on Initialize{
@@ -45,17 +47,14 @@ agent Artist extends AbstractAnimat {
 	on PerceptionEvent{
 		var target = occurrence.perceptions.first
 		
-		if (target === "ALERT") {
+		if (target.type === "ALERT") {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
-					occurrence.body.position,
-					occurrence.body.currentLinearSpeed,
-					occurrence.body.maxLinear,
-					target.position
+					ALERT_RADIUS
 				),
-				new TypeChangeInfluence("ESCAPING")
+				new TypeChangeInfluence("SCARED")
 			)	
-		} else if (target === "ESCAPE") {
+		} else if (target.type === "EXIT") {
 			emitInfluence(
 				this.seekBehaviourExit.runSeek(
 					occurrence.body.position, 
@@ -63,9 +62,9 @@ agent Artist extends AbstractAnimat {
 					occurrence.body.maxLinear, 
 					target.position
 				),
-				new TypeChangeInfluence("SCARED")
+				new TypeChangeInfluence("CALM")
 			)	
-		} else if (target === "BOMB") {
+		} else if (target.type === "BOMB") {
 			emitInfluence(
 				this.fleeBehaviour.runFlee(
 					occurrence.body.position,
@@ -75,7 +74,7 @@ agent Artist extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("SCARED")
 			)
-		} else if (target === "SCENE") {
+		} else if (target.type === "SCENE") {
 			emitInfluence(
 				this.seekBehaviourEntryScene.runSeek(
 					occurrence.body.position, 
@@ -85,7 +84,7 @@ agent Artist extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("PLAYING")
 			)
-		} else if (target === "BACKSTAGE") {
+		} else if (target.type === "BACKSTAGE") {
 			emitInfluence(
 				this.seekBehaviourBackStage.runSeek(
 					occurrence.body.position, 
@@ -93,7 +92,7 @@ agent Artist extends AbstractAnimat {
 					occurrence.body.maxLinear, 
 					target.position
 				),
-				new TypeChangeInfluence("BACKSTAGE")
+				new TypeChangeInfluence("CALM")
 			)
 		}
 	}

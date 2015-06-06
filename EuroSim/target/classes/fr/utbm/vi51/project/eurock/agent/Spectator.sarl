@@ -4,11 +4,121 @@
 package fr.utbm.vi51.project.eurock.^agent
 
 import fr.utbm.info.vi51.framework.^agent.AbstractAnimat
+import fr.utbm.info.vi51.framework.^agent.PhysicEnvironment
+import io.sarl.core.Lifecycle
+import io.sarl.core.DefaultContextInteractions
+import io.sarl.core.Initialize
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringWanderBehaviour
+import fr.utbm.info.vi51.framework.environment.SimulationAgentReady
+import fr.utbm.info.vi51.framework.environment.PerceptionEvent
+import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
+import fr.utbm.vi51.project.eurock.behaviour2.FleeBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.SeekBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.AlertBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringFleeBehaviour
+import fr.utbm.vi51.project.eurock.behaviour2.SteeringSeekBehaviour
+import fr.utbm.info.vi51.framework.math.MathUtil;
 
 /**
- * @author Thomas
+ * @author Nicolas
  *
  */
 agent Spectator extends AbstractAnimat {
+	uses PhysicEnvironment, Lifecycle, DefaultContextInteractions
 	
+	var fleeBehaviour : FleeBehaviour	// To escape the bomb
+	var seekBehaviourExit : SeekBehaviour	// To search the exit
+	var seekBehaviourScene : SeekBehaviour;	// To go to the wanted scene
+	var seekBehaviourStand : SeekBehaviour;	// To go to the wanted stand
+	var wanderBehaviour : SteeringWanderBehaviour; // When he's waiting for a new concert and doesn't want do drink or eat
+	var alertBehaviour : AlertBehaviour; // To alert the others when he is alerted (spreading the alert) 
+	
+	val STOP_RADIUS = MathUtil.PI/10f
+	val SLOW_RADIUS = MathUtil.PI/4f
+	val WANDER_CIRCLE_DISTANCE = 20f
+	val WANDER_CIRCLE_RADIUS = 10f
+	val WANDER_MAX_ROTATION = MathUtil.PI/4f
+	val ALERT_RADIUS = 5f
+	
+	/* The spectator waits for a new concert begins */
+	on Initialize{
+		super._handle_Initialize_0(occurrence)
+		this.fleeBehaviour = new SteeringFleeBehaviour; 
+		this.seekBehaviourExit = new SteeringSeekBehaviour;
+		this.seekBehaviourScene = new SteeringSeekBehaviour;
+		this.seekBehaviourStand = new SteeringSeekBehaviour;
+		this.wanderBehaviour = new SteeringWanderBehaviour(
+					WANDER_CIRCLE_DISTANCE, 
+					WANDER_CIRCLE_RADIUS, 
+					WANDER_MAX_ROTATION,
+					STOP_RADIUS,
+					SLOW_RADIUS)
+		this.alertBehaviour = new AlertBehaviour;
+		emit(new SimulationAgentReady)
+	}
+	
+	on PerceptionEvent{
+		var target = occurrence.perceptions.first
+	
+		if (target.type === "ALERT") {
+			emitInfluence(
+				this.alertBehaviour.runAlert(
+					ALERT_RADIUS
+				),
+				new TypeChangeInfluence("SCARED")
+			)	
+		} else if (target.type === "EXIT") {
+			emitInfluence(
+				this.seekBehaviourExit.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("CALM")
+			)	
+		} else if (target.type === "BOMB") {
+			emitInfluence(
+				this.fleeBehaviour.runFlee(
+					occurrence.body.position,
+					occurrence.body.currentLinearSpeed,
+					occurrence.body.maxLinear,
+					target.position
+				),
+				new TypeChangeInfluence("SCARED")
+			)
+		} else if (target.type === "SCENE") {
+			emitInfluence(
+				this.seekBehaviourScene.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("WATCHING")
+			)
+		} else if (target.type === "STAND") {
+			emitInfluence(
+				this.seekBehaviourStand.runSeek(
+					occurrence.body.position, 
+					occurrence.body.currentLinearSpeed, 
+					occurrence.body.maxLinear, 
+					target.position
+				),
+				new TypeChangeInfluence("HUNGRY")
+			)
+		} else if (target == null) {
+			emitInfluence(
+				this.wanderBehaviour.runWander(
+					occurrence.body.position,
+					occurrence.body.direction,
+					occurrence.body.currentLinearSpeed,
+					occurrence.body.maxLinear,
+					occurrence.body.currentAngularSpeed,
+					occurrence.body.maxAngular
+				),
+				new TypeChangeInfluence("CALM")
+			)
+		}
+	}
 }

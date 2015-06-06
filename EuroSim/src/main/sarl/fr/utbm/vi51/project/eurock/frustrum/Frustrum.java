@@ -1,13 +1,11 @@
 package fr.utbm.vi51.project.eurock.frustrum;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 
-import fr.utbm.vi51.project.eurock.tree4d.QuadTree;
-import fr.utbm.vi51.project.eurock.tree4d.QuadTreeNode;
-import fr.utbm.vi51.project.eurock.general.Point2f;
-import fr.utbm.vi51.project.eurock.general.Vector2f;
+import fr.utbm.vi51.framework.math.Point2f;
+import fr.utbm.vi51.framework.math.Vector2f;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 
 public class Frustrum {
 
