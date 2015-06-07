@@ -9,7 +9,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="C:/Program Files/eclipseSARL/io.janusproject.kernel-2.1.0.0-20150515.032057-40-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="lib" path="F:/Download/io.janusproject.kernel-2.0.2.0-with-dependencies.jar/io.janusproject.kernel-2.0.2.0-with-dependencies.jar.zip"/>
 	<classpathentry kind="con" path="io.sarl.eclipse.launching.SARL_SUPPORT"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -188,7 +188,7 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 				MathUtil.PI/4f,				// max angular speed r/s
 				MathUtil.PI/10f,			// max angular acceleration (r/s)/s
 				null); // no frustum since computePerceptionsFor() is not using this parameter
-		body.setName(LocalizedString.getString(WorldModel.class, "ARTIST", getAgentBodyNumber() + 1));
+		body.setName(LocalizedString.getString(WorldModel.class, "SPECTATOR", getAgentBodyNumber() + 1));
 		addAgentBody(
 				body,
 				randomPositionSpectator(),

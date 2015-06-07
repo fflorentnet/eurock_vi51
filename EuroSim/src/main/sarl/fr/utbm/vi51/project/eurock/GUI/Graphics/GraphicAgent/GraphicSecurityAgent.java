@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.ShapeConverter;
 
 public class GraphicSecurityAgent extends AbstractGraphicAgent {
 
@@ -19,7 +20,7 @@ public class GraphicSecurityAgent extends AbstractGraphicAgent {
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.black);
-		g2d.fillOval((int)pos.getX(), (int)pos.getY(), 8, 8);
+		g2d.fill(ShapeConverter.toShape(this.realAgent.getShape()));
 	}
 
 }

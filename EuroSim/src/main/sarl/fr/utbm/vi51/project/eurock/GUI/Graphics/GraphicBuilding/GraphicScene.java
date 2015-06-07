@@ -3,11 +3,7 @@ package fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
 
-import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 
 public class GraphicScene extends AbstractGraphicBuilding {
@@ -25,6 +21,10 @@ public class GraphicScene extends AbstractGraphicBuilding {
 		super(px, py);
 	}
 
+	public GraphicScene(Shape2f shape) {
+		// TODO Auto-generated constructor stub
+		super(shape);
+	}
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.cyan.brighter());

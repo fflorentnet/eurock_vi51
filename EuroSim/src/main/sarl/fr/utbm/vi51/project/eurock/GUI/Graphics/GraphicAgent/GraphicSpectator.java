@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.ShapeConverter;
+import fr.utbm.vi51.project.eurock.environment.State;
 
 public class GraphicSpectator extends AbstractGraphicAgent {
 
@@ -13,6 +15,7 @@ public class GraphicSpectator extends AbstractGraphicAgent {
 	private boolean bStep = true;
 	public GraphicSpectator(AgentBody r) {
 		super(r);
+		this.realAgent.setState(State.ALERTED);
 	}
 	public GraphicSpectator(AgentBody r, Point2f pos) {
 		super(r, pos);
@@ -20,9 +23,15 @@ public class GraphicSpectator extends AbstractGraphicAgent {
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		panic(g2d);
-		g2d.setColor(Color.blue);
-		g2d.fillOval((int)pos.getX(), (int)pos.getY(), 8, 8);
+		if (this.realAgent.getState() == State.ALERTED)
+			panic(g2d);
+		
+		
+		if (this.realAgent.getState() == State.CALM)
+			g2d.setColor(Color.blue);
+		else
+			g2d.setColor(Color.red);
+		g2d.fill(ShapeConverter.toShape(this.realAgent.getShape()));
 	}
 	public void panic(Graphics2D g2d)
 	{
@@ -37,7 +46,7 @@ public class GraphicSpectator extends AbstractGraphicAgent {
 			case 4 : c = new Color(85, 0, 0); break;
 		}
 		g2d.setColor(c);
-		g2d.drawOval((int)(pos.getX() - step/2) , (int)(pos.getY() - step/2), 8+(step), 8+(step));
+		g2d.drawOval((int)(pos.getX() - step/2) , (int)(pos.getY() - step/2), (int) this.realAgent.getShape().getBounds().getHeight()/2+(step), (int) this.realAgent.getShape().getBounds().getWidth()/2+(step));
 
 		if (bStep)
 			step++;

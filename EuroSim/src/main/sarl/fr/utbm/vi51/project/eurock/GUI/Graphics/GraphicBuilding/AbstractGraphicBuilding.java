@@ -4,11 +4,15 @@ import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 
 import javax.swing.JComponent;
 
+import fr.utbm.info.vi51.framework.math.Circle2f;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.ShapeConverter;
 
 public abstract class AbstractGraphicBuilding extends AbstractGraphicElement {
 
@@ -31,7 +35,9 @@ public abstract class AbstractGraphicBuilding extends AbstractGraphicElement {
 		for (int i = 0; i < px.length; ++i)
 			((Polygon)shp).addPoint(px[i], py[i]);
 	}
-	
+	public AbstractGraphicBuilding(Shape2f shape) {
+		this.shp = ShapeConverter.toShape(shape);
+	}
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
