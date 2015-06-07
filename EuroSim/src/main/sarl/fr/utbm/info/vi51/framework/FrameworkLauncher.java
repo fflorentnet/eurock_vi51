@@ -37,6 +37,7 @@ import fr.utbm.info.vi51.framework.agent.AbstractAnimat;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.environment.Environment;
 import fr.utbm.info.vi51.framework.environment.EnvironmentAgent;
+import fr.utbm.info.vi51.framework.environment.EnvironmentListener;
 import fr.utbm.info.vi51.framework.environment.StopSimulation;
 import fr.utbm.info.vi51.framework.gui.FrameworkGUI;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
@@ -53,7 +54,7 @@ public class FrameworkLauncher {
 	
 	private static UUID environmentInteractionSpace = null;
 	private static Environment environmentSingleton = null;
-	private static FrameworkGUI uiSingleton = null;
+	private static EnvironmentListener uiSingleton = null;
 	private static Kernel kernel = null;
 	private static final AtomicBoolean canStop = new AtomicBoolean(false);
 
@@ -68,7 +69,7 @@ public class FrameworkLauncher {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void launchSimulation(Environment environment, SpawnMapping spawnMapping,
-			DynamicType behaviorType, FrameworkGUI gui, Object... parameters) throws Exception {
+			DynamicType behaviorType, EnvironmentListener gui, Object... parameters) throws Exception {
 		Boot.setOffline(true);
 		Boot.setVerboseLevel(LoggerCreator.toInt(Level.INFO));
 		Boot.showJanusLogo();
@@ -93,7 +94,7 @@ public class FrameworkLauncher {
 			if (environmentSingleton != null) {
 				environmentSingleton.addEnvironmentListener(uiSingleton);
 			}
-			uiSingleton.setVisible(true);
+			//uiSingleton.setVisible(true);
 		}
 		canStop.set(true);
 	}
@@ -111,11 +112,11 @@ public class FrameworkLauncher {
 		StopSimulation sSimulation = new StopSimulation(adr);
 		context.getDefaultSpace().emit(sSimulation);
 		if (uiSingleton!=null) {
-			uiSingleton.setVisible(false);
+			//uiSingleton.setVisible(false);
 			if (environmentSingleton != null) {
 				environmentSingleton.removeEnvironmentListener(uiSingleton);
 			}
-			uiSingleton.dispose();
+			//uiSingleton.dispose();
 		}
 		environmentSingleton = null;
 		environmentInteractionSpace = null;
@@ -154,7 +155,7 @@ public class FrameworkLauncher {
 			if (environmentSingleton != null) {
 				environmentSingleton.addEnvironmentListener(uiSingleton);
 			}
-			uiSingleton.setVisible(true);
+			//uiSingleton.setVisible(true);
 		}
 		canStop.set(true);
 	}

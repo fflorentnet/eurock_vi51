@@ -1,6 +1,5 @@
 package fr.utbm.vi51.project.eurock.agent;
 
-import com.google.common.base.Objects;
 import fr.utbm.info.vi51.framework.agent.AbstractAnimat;
 import fr.utbm.info.vi51.framework.agent.BehaviourOutput;
 import fr.utbm.info.vi51.framework.environment.PerceptionEvent;
@@ -14,7 +13,6 @@ import fr.utbm.vi51.project.eurock.behaviour.SeekBehaviour;
 import fr.utbm.vi51.project.eurock.behaviour.SteeringFleeBehaviour;
 import fr.utbm.vi51.project.eurock.behaviour.SteeringSeekBehaviour;
 import fr.utbm.vi51.project.eurock.behaviour.SteeringWanderBehaviour;
-import fr.utbm.vi51.project.eurock.environment.State;
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence;
 import io.sarl.core.AgentSpawned;
 import io.sarl.core.DefaultContextInteractions;
@@ -31,7 +29,6 @@ import io.sarl.lang.core.Percept;
 import io.sarl.lang.core.Scope;
 import io.sarl.lang.core.Space;
 import io.sarl.lang.core.SpaceID;
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -92,76 +89,15 @@ public class Spectator extends AbstractAnimat {
   
   @Percept
   public void _handle_PerceptionEvent_1(final PerceptionEvent occurrence) {
-    fr.utbm.info.vi51.framework.environment.Percept target = this.first(occurrence.perceptionsView);
-    Serializable _type = target.getType();
-    boolean _tripleEquals = (_type == "ALERT");
-    if (_tripleEquals) {
-      boolean _runAlert = this.alertBehaviour.runAlert(occurrence.perceptionsAlert);
-      if (_runAlert) {
-        occurrence.body.setState(State.ALERTED);
-      }
-    } else {
-      Serializable _type_1 = target.getType();
-      boolean _tripleEquals_1 = (_type_1 == "EXIT");
-      if (_tripleEquals_1) {
-        Point2f _position = occurrence.body.getPosition();
-        float _currentLinearSpeed = occurrence.body.getCurrentLinearSpeed();
-        float _maxLinear = this.getMaxLinear(occurrence.body);
-        Point2f _position_1 = target.getPosition();
-        BehaviourOutput _runSeek = this.seekBehaviourExit.runSeek(_position, _currentLinearSpeed, _maxLinear, _position_1);
-        TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("CALM");
-        this.emitInfluence(_runSeek, _typeChangeInfluence);
-      } else {
-        Serializable _type_2 = target.getType();
-        boolean _tripleEquals_2 = (_type_2 == "BOMB");
-        if (_tripleEquals_2) {
-          Point2f _position_2 = occurrence.body.getPosition();
-          float _currentLinearSpeed_1 = occurrence.body.getCurrentLinearSpeed();
-          float _maxLinear_1 = this.getMaxLinear(occurrence.body);
-          Point2f _position_3 = target.getPosition();
-          BehaviourOutput _runFlee = this.fleeBehaviour.runFlee(_position_2, _currentLinearSpeed_1, _maxLinear_1, _position_3);
-          TypeChangeInfluence _typeChangeInfluence_1 = new TypeChangeInfluence("SCARED");
-          this.emitInfluence(_runFlee, _typeChangeInfluence_1);
-        } else {
-          Serializable _type_3 = target.getType();
-          boolean _tripleEquals_3 = (_type_3 == "SCENE");
-          if (_tripleEquals_3) {
-            Point2f _position_4 = occurrence.body.getPosition();
-            float _currentLinearSpeed_2 = occurrence.body.getCurrentLinearSpeed();
-            float _maxLinear_2 = this.getMaxLinear(occurrence.body);
-            Point2f _position_5 = target.getPosition();
-            BehaviourOutput _runSeek_1 = this.seekBehaviourScene.runSeek(_position_4, _currentLinearSpeed_2, _maxLinear_2, _position_5);
-            TypeChangeInfluence _typeChangeInfluence_2 = new TypeChangeInfluence("WATCHING");
-            this.emitInfluence(_runSeek_1, _typeChangeInfluence_2);
-          } else {
-            Serializable _type_4 = target.getType();
-            boolean _tripleEquals_4 = (_type_4 == "STAND");
-            if (_tripleEquals_4) {
-              Point2f _position_6 = occurrence.body.getPosition();
-              float _currentLinearSpeed_3 = occurrence.body.getCurrentLinearSpeed();
-              float _maxLinear_3 = this.getMaxLinear(occurrence.body);
-              Point2f _position_7 = target.getPosition();
-              BehaviourOutput _runSeek_2 = this.seekBehaviourStand.runSeek(_position_6, _currentLinearSpeed_3, _maxLinear_3, _position_7);
-              TypeChangeInfluence _typeChangeInfluence_3 = new TypeChangeInfluence("HUNGRY");
-              this.emitInfluence(_runSeek_2, _typeChangeInfluence_3);
-            } else {
-              boolean _equals = Objects.equal(target, null);
-              if (_equals) {
-                Point2f _position_8 = occurrence.body.getPosition();
-                Vector2f _direction = occurrence.body.getDirection();
-                float _currentLinearSpeed_4 = occurrence.body.getCurrentLinearSpeed();
-                float _maxLinear_4 = this.getMaxLinear(occurrence.body);
-                float _currentAngularSpeed = occurrence.body.getCurrentAngularSpeed();
-                float _maxAngular = this.getMaxAngular(occurrence.body);
-                BehaviourOutput _runWander = this.wanderBehaviour.runWander(_position_8, _direction, _currentLinearSpeed_4, _maxLinear_4, _currentAngularSpeed, _maxAngular);
-                TypeChangeInfluence _typeChangeInfluence_4 = new TypeChangeInfluence("CALM");
-                this.emitInfluence(_runWander, _typeChangeInfluence_4);
-              }
-            }
-          }
-        }
-      }
-    }
+    Point2f _position = occurrence.body.getPosition();
+    Vector2f _direction = occurrence.body.getDirection();
+    float _currentLinearSpeed = occurrence.body.getCurrentLinearSpeed();
+    float _maxLinear = this.getMaxLinear(occurrence.body);
+    float _currentAngularSpeed = occurrence.body.getCurrentAngularSpeed();
+    float _maxAngular = this.getMaxAngular(occurrence.body);
+    BehaviourOutput _runWander = this.wanderBehaviour.runWander(_position, _direction, _currentLinearSpeed, _maxLinear, _currentAngularSpeed, _maxAngular);
+    TypeChangeInfluence _typeChangeInfluence = new TypeChangeInfluence("CALM");
+    this.emitInfluence(_runWander, _typeChangeInfluence);
   }
   
   /**

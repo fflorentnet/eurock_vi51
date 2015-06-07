@@ -58,7 +58,7 @@ agent Spectator extends AbstractAnimat {
 	}
 	
 	on PerceptionEvent{
-		var target = occurrence.perceptionsView.first
+		/*var target = occurrence.perceptionsView.first
 	
 		if (target.type === "ALERT") {
 				if(this.alertBehaviour.runAlert(occurrence.perceptionsAlert)){
@@ -116,6 +116,17 @@ agent Spectator extends AbstractAnimat {
 				),
 				new TypeChangeInfluence("CALM")
 			)
-		}
+		}*/
+		emitInfluence(
+				this.wanderBehaviour.runWander(
+					occurrence.body.position,
+					occurrence.body.direction,
+					occurrence.body.currentLinearSpeed,
+					occurrence.body.maxLinear,
+					occurrence.body.currentAngularSpeed,
+					occurrence.body.maxAngular
+				),
+				new TypeChangeInfluence("CALM")
+			)
 	}
 }

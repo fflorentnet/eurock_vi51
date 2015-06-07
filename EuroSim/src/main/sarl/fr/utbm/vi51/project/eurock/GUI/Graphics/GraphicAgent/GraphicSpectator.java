@@ -15,7 +15,7 @@ public class GraphicSpectator extends AbstractGraphicAgent {
 	private boolean bStep = true;
 	public GraphicSpectator(AgentBody r) {
 		super(r);
-		this.realAgent.setState(State.ALERTED);
+		//this.realAgent.setState(State.ALERTED);
 	}
 	public GraphicSpectator(AgentBody r, Point2f pos) {
 		super(r, pos);

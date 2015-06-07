@@ -26,5 +26,6 @@ public abstract class AbstractGraphicElement extends AbstractComponent implement
 	public void unselect() { this.selected = false; }
 	public abstract void update();
     public abstract boolean intersect(Shape2f<?> r);
+    public abstract void destroy();
 
 }

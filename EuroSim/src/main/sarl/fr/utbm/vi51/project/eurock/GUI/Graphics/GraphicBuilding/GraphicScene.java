@@ -30,7 +30,10 @@ public class GraphicScene extends AbstractGraphicBuilding {
 		g2d.setColor(Color.cyan.brighter());
 		g2d.fill(shp);
 		g2d.setColor(Color.black);
-		g2d.draw(shp);	
+		g2d.draw(shp);		
+	}
+	public void destroy()
+	{
 		
 	}
 }

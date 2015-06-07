@@ -49,4 +49,8 @@ public abstract class AbstractGraphicAgent extends AbstractGraphicElement {
     	else
     		return (new Circle2f(pos, 8)).intersects(r);
     }
+    public void destroy()
+    {
+
+    }
 }

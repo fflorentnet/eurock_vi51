@@ -1,5 +1,6 @@
 package fr.utbm.vi51.project.eurock.GUI.Graphics.Frame;
 
+import fr.utbm.info.vi51.framework.environment.EnvironmentEvent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicComponent.LabelComponent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutGUI;
 
@@ -19,6 +20,12 @@ public class PopupWindow extends AbstractFrame {
         
     	this.setContentPane(this.jlp);
     	this.setResizable(false);    	repaint();
+	}
+
+	@Override
+	public void environmentChanged(EnvironmentEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

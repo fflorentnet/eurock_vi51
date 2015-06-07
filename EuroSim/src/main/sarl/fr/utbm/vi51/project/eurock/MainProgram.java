@@ -25,7 +25,7 @@ public class MainProgram {
 	private static float WORLD_SIZE_X = 700;
 	private static float WORLD_SIZE_Y = 700;
 	private static int NUMBER_ARTIST = 4;
-	private static int NUMBER_SPECTATOR = 500;
+	private static int NUMBER_SPECTATOR = 50;
 	private static int NUMBER_SECURITYAGENT = 3;
 
 	/** Main program.
@@ -62,11 +62,11 @@ public class MainProgram {
 		Window w = Window.getInstance();
 		w.setEnvironment(environment);
 		w.run();
-		/*FrameworkLauncher.launchSimulation(
+		FrameworkLauncher.launchSimulation(
 				environment,
 				new ApplicationMapping(),
-				DynamicType.KINEMATIC,
-				w);*/
+				DynamicType.STEERING,
+				w);
 				
 	}
 

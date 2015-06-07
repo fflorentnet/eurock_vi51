@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import fr.utbm.info.vi51.framework.environment.EnvironmentListener;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractComponent;
-import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.AbstractGraphicAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding.AbstractGraphicBuilding;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.AbstractLayout;
@@ -17,7 +17,7 @@ import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.MouseManager;
 
 
-public abstract class AbstractFrame extends JFrame implements IFrame {
+public abstract class AbstractFrame extends JFrame implements IFrame, EnvironmentListener {
 	private static final long serialVersionUID = 1L;
 	protected AbstractLayout<AbstractComponent> gui;
 	protected AbstractLayout<AbstractGraphicBuilding> map;

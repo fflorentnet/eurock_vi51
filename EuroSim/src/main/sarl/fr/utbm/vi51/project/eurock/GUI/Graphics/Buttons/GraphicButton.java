@@ -30,13 +30,15 @@ public class GraphicButton extends JButton  {
 
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f)); 
 
-		g2.setColor(new Color(6, 113, 154));
+		g2.setColor(new Color(34, 102, 102));
+		
 		if (this.getModel().isRollover())
-			g2.setColor(new Color(19, 43, 168));
+			g2.setColor(new Color(170, 132, 57));
 		if(this.getModel().isPressed())
-			g2.setColor(new Color(246, 175,0));
+			g2.setColor(new Color(170, 57, 57));
 		if(this.getModel().isSelected())
-			g2.setColor(new Color(246, 128, 0));
+			g2.setColor(new Color(233, 81, 29));
+		
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.setColor(Color.white);
 		// Finding size of text so can position in center. 

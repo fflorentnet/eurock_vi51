@@ -25,5 +25,4 @@ public class GraphicArtist extends AbstractGraphicAgent {
 		g2d.fill(ShapeConverter.toShape(this.realAgent.getShape()));
 		//g2d.fillOval((int)pos.getX(), (int)pos.getY(), 8, 8);
 	}
-
 }

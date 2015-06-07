@@ -3,6 +3,7 @@ package fr.utbm.vi51.project.eurock.GUI.Graphics.Frame;
 import java.util.Iterator;
 
 import fr.utbm.info.vi51.framework.environment.AgentBody;
+import fr.utbm.info.vi51.framework.environment.EnvironmentEvent;
 import fr.utbm.info.vi51.framework.environment.SituatedObject;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Buttons.AddAgentButton;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Buttons.ZoomButton;
@@ -122,5 +123,11 @@ public class Window extends AbstractFrame {
 		this.addGUI(zplus);
 		this.addGUI(zminus);
 		this.addGUI(busButt);
+	}
+	@Override
+	public void environmentChanged(EnvironmentEvent event) {
+		// TODO Auto-generated method stub
+		System.out.println("Event:"+event.toString());
+		
 	}
 }
