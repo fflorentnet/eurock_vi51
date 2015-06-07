@@ -41,6 +41,7 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	private static final long serialVersionUID = -4636419559142339321L;
 	
 	private final Frustum frustum;
+	private final Frustum frustumAlert;
 	
 	private transient MotionInfluence motionInfluence = null;
 	private transient List<Influence> otherInfluences = new ArrayList<>();
@@ -56,10 +57,11 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 * @param frustum the field-of-view associated to the body.
 	 */
 	public AgentBody(UUID id, Shape2f<?> shape, float maxLinearSpeed, float maxLinearAcceleration,
-			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum) {
+			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum, Frustum frustumAlert) {
 		super(id, shape, maxLinearSpeed, maxLinearAcceleration, maxAngularSpeed, maxAngularAcceleration);
 		assert (frustum == null || Objects.equals(id, frustum.getOwner()));
 		this.frustum = frustum;
+		this.frustumAlert = frustumAlert;
 		setType("BODY");
 	}
 	
@@ -91,6 +93,15 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 */
 	public Frustum getFrustum() {
 		return this.frustum;
+	}
+	
+	
+	/** Replies the frustum associated to this body.
+	 *
+	 * @return the frustum.
+	 */
+	public Frustum getFrustumAlert() {
+		return this.frustumAlert;
 	}
 	
 	/** Invoked to send the given influence to the environment.

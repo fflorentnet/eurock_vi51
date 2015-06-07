@@ -3,32 +3,43 @@ package fr.utbm.vi51.project.eurock.environment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import fr.utbm.info.vi51.framework.environment.AbstractEnvironment;
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
+import fr.utbm.info.vi51.framework.environment.Frustum;
 import fr.utbm.info.vi51.framework.environment.Influence;
 import fr.utbm.info.vi51.framework.environment.MotionInfluence;
 import fr.utbm.info.vi51.framework.environment.Percept;
 import fr.utbm.info.vi51.framework.environment.SituatedObject;
+import fr.utbm.info.vi51.framework.environment.SpatialDataStructure;
 import fr.utbm.info.vi51.framework.gui.WorldModelStateProvider;
 import fr.utbm.info.vi51.framework.math.Circle2f;
 import fr.utbm.info.vi51.framework.math.MathUtil;
 import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
 import fr.utbm.info.vi51.framework.time.StepTimeManager;
 import fr.utbm.info.vi51.framework.time.TimeManager;
 import fr.utbm.info.vi51.framework.util.CollectionUtil;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
+import fr.utbm.vi51.project.eurock.frustrum.CircleFrustum;
+import fr.utbm.vi51.project.eurock.tree4d.QuadTree;
 
 public class WorldModel extends AbstractEnvironment implements WorldModelStateProvider {
 
 	private final static float ARTIST_SIZE = 20f;
 	private final static float SPECTATOR_SIZE = 20f;
 	private final static float SECURITYAGENT_SIZE = 20f;
+	
+	private final static float PERCEPTION_RADIUS_VIEW = 50f;
+	private final static float PERCEPTION_RADIUS_ALERT = 20f;
+	
+	private final SpatialDataStructure<SituatedObject> dataStructure = new QuadTree();
 	
 	private MouseTarget mouseTarget = null;
 	
@@ -38,6 +49,15 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	 */
 	public WorldModel(float width, float height) {
 		super(width, height, new StepTimeManager(500));
+		this.dataStructure.initialize(new Rectangle2f(0f, 0f, width, height));
+	}
+	
+	/** Replies the spatial data-structure.
+	 * 
+	 * @return the spatial data-structure.
+	 */
+	public SpatialDataStructure<SituatedObject> getSpatialDataStructure() {
+		return this.dataStructure;
 	}
 	
 	/** {@inheritDoc}
@@ -52,7 +72,7 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	 */
 	@Override
 	protected List<Percept> computePerceptionsFor(AgentBody agent) {
-		List<Percept> allPercepts = new ArrayList<Percept>();
+		/*List<Percept> allPercepts = new ArrayList<Percept>();
 		if (agent!=null) {
 			float x1 = agent.getX();
 			float y1 = agent.getY();
@@ -82,7 +102,24 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 			}
 		}
 		
-		return allPercepts;
+		return allPercepts;*/
+		
+		List<Percept> shapedPercept = new ArrayList<>();
+		
+		Frustum frustumAgent = agent.getFrustum();
+		
+		Shape2f<?> frustumShapde = frustumAgent.toShape(agent.getPosition(), agent.getDirection());
+		
+		Iterator it = dataStructure.dataIterator(frustumShapde);
+		
+		while(it.hasNext()){
+			SituatedObject obj = (SituatedObject) it.next();
+			if (!agent.getID().equals(obj.getID())) {
+				shapedPercept.add(new Percept(obj));
+			}
+		}
+		
+		return shapedPercept;
 	}
 
 	/**
@@ -158,6 +195,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	}
 	
 	public void createArtist() {
+		UUID id = UUID.randomUUID();
+		UUID id2 = UUID.randomUUID();
 		AgentBody body = new AgentBody(
 				UUID.randomUUID(),
 				new Circle2f(0f, 0f, ARTIST_SIZE), // body
@@ -165,7 +204,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 				.5f,						// max linear acceleration (m/s)/s
 				MathUtil.PI/4f,				// max angular speed r/s
 				MathUtil.PI/10f,			// max angular acceleration (r/s)/s
-				null); // no frustum since computePerceptionsFor() is not using this parameter
+				new CircleFrustum(id, PERCEPTION_RADIUS_VIEW),
+				new CircleFrustum(id2, PERCEPTION_RADIUS_ALERT)); // no frustum since computePerceptionsFor() is not using this parameter
 		body.setName(LocalizedString.getString(WorldModel.class, "ARTIST", getAgentBodyNumber() + 1));
 		addAgentBody(
 				body,
@@ -180,6 +220,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	}
 	
 	public void createSpectator() {
+		UUID id = UUID.randomUUID();
+		UUID id2 = UUID.randomUUID();
 		AgentBody body = new AgentBody(
 				UUID.randomUUID(),
 				new Circle2f(0f, 0f, SPECTATOR_SIZE), // body
@@ -187,7 +229,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 				.5f,						// max linear acceleration (m/s)/s
 				MathUtil.PI/4f,				// max angular speed r/s
 				MathUtil.PI/10f,			// max angular acceleration (r/s)/s
-				null); // no frustum since computePerceptionsFor() is not using this parameter
+				new CircleFrustum(id, PERCEPTION_RADIUS_VIEW),
+				new CircleFrustum(id2, PERCEPTION_RADIUS_ALERT)); // no frustum since computePerceptionsFor() is not using this parameter
 		body.setName(LocalizedString.getString(WorldModel.class, "ARTIST", getAgentBodyNumber() + 1));
 		addAgentBody(
 				body,
@@ -202,6 +245,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	}
 	
 	public void createSecurityAgent() {
+		UUID id = UUID.randomUUID();
+		UUID id2 = UUID.randomUUID();
 		AgentBody body = new AgentBody(
 				UUID.randomUUID(),
 				new Circle2f(0f, 0f, SECURITYAGENT_SIZE), // body
@@ -209,7 +254,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 				.5f,						// max linear acceleration (m/s)/s
 				MathUtil.PI/4f,				// max angular speed r/s
 				MathUtil.PI/10f,			// max angular acceleration (r/s)/s
-				null); // no frustum since computePerceptionsFor() is not using this parameter
+				new CircleFrustum(id, PERCEPTION_RADIUS_VIEW),
+				new CircleFrustum(id2, PERCEPTION_RADIUS_ALERT));  // no frustum since computePerceptionsFor() is not using this parameter
 		body.setName(LocalizedString.getString(WorldModel.class, "SECURITYAGENT", getAgentBodyNumber() + 1));
 		addAgentBody(
 				body,
@@ -226,12 +272,12 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 
 	@Override
 	protected void onAgentBodyCreated(AgentBody body) {
-		//
+		this.dataStructure.addData(body);
 	}
 
 	@Override
 	protected void onAgentBodyDestroyed(AgentBody body) {
-		//
+		this.dataStructure.removeData(body);
 	}
 	
 	/**

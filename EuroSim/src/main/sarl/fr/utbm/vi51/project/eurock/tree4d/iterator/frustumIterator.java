@@ -30,25 +30,25 @@ verifBound(tmp);
 }
 
 public Boolean verifBound(QuadTreeNode<D> tmp){
-Shape2f<?> objectBounds;
-if(tmp.getData() != null && tmp.getData().size() > 0){
-
-if(this.boundsFrustum.intersects(tmp.getBounds())){
-
-for(D par : tmp.getData()){
-
-objectBounds = par.getShape();
-
-if(this.boundsFrustum.intersects(objectBounds)){
-stack.add(par);
-}
-
-}
-
-}
-}
-
-return null;
+	Shape2f<?> objectBounds;
+	if(tmp.getData() != null && tmp.getData().size() > 0){
+	
+		if(this.boundsFrustum.intersects(tmp.getBounds())){
+		
+		for(D par : tmp.getData()){
+		
+			objectBounds = par.getShape();
+			
+			if(this.boundsFrustum.intersects(objectBounds)){
+			stack.add(par);
+			}
+		
+		}
+		
+		}
+	}
+	
+	return null;
 }
 
 @Override
@@ -62,10 +62,10 @@ return false;
 
 @Override
 public D next() {
-D tmp;
-tmp = stack.pop();
-searchNext();
-return tmp;
+	D tmp;
+	tmp = stack.pop();
+		searchNext();
+	return tmp;
 }
 
 @Override
