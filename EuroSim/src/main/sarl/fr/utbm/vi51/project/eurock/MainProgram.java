@@ -1,9 +1,16 @@
 package fr.utbm.vi51.project.eurock;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import io.sarl.lang.core.Agent;
 import fr.utbm.info.vi51.framework.FrameworkLauncher;
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
+import fr.utbm.info.vi51.framework.environment.ImmobileObject;
+import fr.utbm.info.vi51.framework.math.Point2f;
+import fr.utbm.info.vi51.framework.math.Rectangle2f;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Frame.Window;
@@ -11,6 +18,7 @@ import fr.utbm.vi51.project.eurock.agent.Artist;
 import fr.utbm.vi51.project.eurock.agent.SecurityAgent;
 import fr.utbm.vi51.project.eurock.agent.Spectator;
 import fr.utbm.vi51.project.eurock.environment.WorldModel;
+import fr.utbm.vi51.project.eurock.semantics.Semantics;
 
 public class MainProgram {
 
@@ -40,6 +48,17 @@ public class MainProgram {
 		for (int i = 0; i < NUMBER_SECURITYAGENT; ++i) {
 			environment.createSecurityAgent();
 		}
+		
+		List<ImmobileObject> listIm = new ArrayList<ImmobileObject>();
+		
+		listIm.add(new ImmobileObject(UUID.randomUUID(), new Rectangle2f(new Point2f(3, 2), new Point2f(6, 4)), new Point2f(200,234), "Scene"));
+		listIm.add(new ImmobileObject(UUID.randomUUID(), new Rectangle2f(new Point2f(3, 2), new Point2f(6, 4)), new Point2f(250,234), "Scene"));
+		listIm.add(new ImmobileObject(UUID.randomUUID(), new Rectangle2f(new Point2f(3, 2), new Point2f(6, 4)), new Point2f(500,234), "Scene"));
+		listIm.add(new ImmobileObject(UUID.randomUUID(), new Rectangle2f(new Point2f(3, 2), new Point2f(6, 4)), new Point2f(300,234), "Scene"));
+		listIm.add(new ImmobileObject(UUID.randomUUID(), new Rectangle2f(new Point2f(3, 2), new Point2f(6, 4)), new Point2f(400,234), "Scene"));
+		
+		environment.setImmobileObject(listIm);
+		
 		Window w = Window.getInstance();
 		w.setEnvironment(environment);
 		w.run();

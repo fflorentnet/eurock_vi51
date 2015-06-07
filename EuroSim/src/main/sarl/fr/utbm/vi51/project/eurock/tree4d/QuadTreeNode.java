@@ -31,6 +31,11 @@ public class QuadTreeNode<D extends ShapedObject> {
 		bounds = r;
 		parent = pa;
 		lData = new ArrayList<D>();
+		children = new QuadTreeNode[4];
+		children[LEFTTOP] = null;
+		children[RIGHTTOP] = null;
+		children[RIGHTBOTTOM] = null;
+		children[LEFTBOTTOM] = null;
 	}
 
 	public Rectangle2f getBounds() {
@@ -41,7 +46,7 @@ public class QuadTreeNode<D extends ShapedObject> {
 	{
 		parent = p;
 	}
-	public void add(D nData)
+	public void add(D nData, boolean b)
 	{
 		if (nData.getShape().intersects(this.getBounds()))
 		{
@@ -51,26 +56,38 @@ public class QuadTreeNode<D extends ShapedObject> {
 
 			// Le noeud est une feuille avec des donn�es:
 			// -> Il faut cr�er les fils
-			if (lData.isEmpty())
+			if (lData.isEmpty() && !b)
 			{
-				children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
-				children[RIGHTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(
-						Center.getX(), Lower.getY(), 
-						Upper.getX(),  Lower.getY()
-						));
+				lData.add(nData);
+				if (children[LEFTTOP] == null)
+				{
+					children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
+					children[LEFTTOP].add(nData, true);					
+				}
+				if (children[RIGHTTOP] == null)
+				{
+					children[RIGHTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(
+							Center.getX(), Lower.getY(), 
+							Upper.getX(),  Lower.getY()
+							));
+					children[RIGHTTOP].add(nData, true);
+				}
+				
+				if (children[LEFTBOTTOM] == null)
+				{
 				children[LEFTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f( 
 						Center.getX(), Lower.getY(),
 						Upper.getX(), Center.getY()
 						));
-				children[RIGHTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
+				children[LEFTBOTTOM].add(nData, true);
+				}
 
-				children[LEFTTOP].add(nData);
+				if (children[RIGHTBOTTOM] == null)
+				{
+					children[RIGHTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
+					children[RIGHTBOTTOM].add(nData, true);
+				}
 
-				children[RIGHTTOP].add(nData);
-
-				children[LEFTBOTTOM].add(nData);
-
-				children[RIGHTBOTTOM].add(nData);
 			}
 
 			// Le noeud n'est pas une feuille
@@ -80,7 +97,10 @@ public class QuadTreeNode<D extends ShapedObject> {
 				lData.add(nData);
 			}
 		}
-
+	}
+	public void add(D nData)
+	{
+		this.add(nData, false);
 	}
 	//}
 	public QuadTreeNode<D> getParent() {

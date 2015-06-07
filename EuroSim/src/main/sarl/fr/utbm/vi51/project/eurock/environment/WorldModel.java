@@ -11,6 +11,7 @@ import fr.utbm.info.vi51.framework.environment.AbstractEnvironment;
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.environment.DynamicType;
 import fr.utbm.info.vi51.framework.environment.Frustum;
+import fr.utbm.info.vi51.framework.environment.ImmobileObject;
 import fr.utbm.info.vi51.framework.environment.Influence;
 import fr.utbm.info.vi51.framework.environment.MotionInfluence;
 import fr.utbm.info.vi51.framework.environment.Percept;
@@ -40,6 +41,8 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	private final static float PERCEPTION_RADIUS_ALERT = 20f;
 	
 	private final SpatialDataStructure<SituatedObject> dataStructure = new QuadTree();
+	private final SpatialDataStructure<SituatedObject> dataStructureImmobile = new QuadTree();
+	
 	
 	private MouseTarget mouseTarget = null;
 	
@@ -50,15 +53,27 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	public WorldModel(float width, float height) {
 		super(width, height, new StepTimeManager(500));
 		this.dataStructure.initialize(new Rectangle2f(0f, 0f, width, height));
+
+		this.dataStructureImmobile.initialize(new Rectangle2f(0f, 0f, width, height));
 	}
 	
-	/** Replies the spatial data-structure.
+	/** Replies the spatial data-structure for mobile objetc.
 	 * 
-	 * @return the spatial data-structure.
+	 * @return the spatial data-structurefor mobile objetc.
 	 */
 	public SpatialDataStructure<SituatedObject> getSpatialDataStructure() {
 		return this.dataStructure;
 	}
+	
+	/** Replies the spatial data-structureimmobile objetc.
+	 * 
+	 * @return the spatial data-structure for immobile objetc.
+	 */
+	public SpatialDataStructure<SituatedObject> getSpatialDataStructureImmobile() {
+		return this.dataStructureImmobile;
+	}
+	
+	
 	
 	/** {@inheritDoc}
 	 */
@@ -231,7 +246,7 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 				MathUtil.PI/10f,			// max angular acceleration (r/s)/s
 				new CircleFrustum(id, PERCEPTION_RADIUS_VIEW),
 				new CircleFrustum(id2, PERCEPTION_RADIUS_ALERT)); // no frustum since computePerceptionsFor() is not using this parameter
-		body.setName(LocalizedString.getString(WorldModel.class, "ARTIST", getAgentBodyNumber() + 1));
+		body.setName(LocalizedString.getString(WorldModel.class, "SPECTATOR", getAgentBodyNumber() + 1));
 		addAgentBody(
 				body,
 				randomPositionSpectator(),
@@ -278,6 +293,12 @@ public class WorldModel extends AbstractEnvironment implements WorldModelStatePr
 	@Override
 	protected void onAgentBodyDestroyed(AgentBody body) {
 		this.dataStructure.removeData(body);
+	}
+	
+	public void setImmobileObject(List<ImmobileObject> list){
+		for(ImmobileObject i : list){
+			dataStructureImmobile.addData(i);
+		}
 	}
 	
 	/**
