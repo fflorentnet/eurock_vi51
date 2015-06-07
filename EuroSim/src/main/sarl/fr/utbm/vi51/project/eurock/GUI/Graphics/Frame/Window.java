@@ -7,7 +7,6 @@ import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.AbstractGraphicAgen
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.GraphicArtist;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.GraphicSecurityAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.GraphicSpectator;
-import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding.GraphicScene;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutGUI;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.LayoutMap;
@@ -85,17 +84,6 @@ public class Window extends AbstractFrame {
 		ZoomButton zplus = new ZoomButton("+", 0, 200, 40, 40, 10);
     	ZoomButton zminus = new ZoomButton("-", 0, 240, 40, 40, -10);
     	AddAgentButton busButt = new AddAgentButton("A", 0, 280, 40, 40);
-    	
-    	AbstractGraphicAgent agentTemp;
-    	/*for (int i = 0; i < 10; i++)
-    	{
-    		Random rand = new Random();
-    		int x = rand.nextInt((800 - 0) + 1) + 0;
-    		int y = rand.nextInt((800 - 0) + 1) + 0;
-    		agentTemp = new GraphicSpectator(null, new Point2f(x, y));
-    		this.addAgent(agentTemp);
-    		//w.addNetworkElement(new YellowBus(x,y) );
-    	}*/
     	
     	/*int[] px = { 250, 200, 550, 500 };
     	int[] py = { 100, 200, 200, 100 };
