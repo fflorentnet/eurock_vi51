@@ -20,9 +20,9 @@ public class GraphicSpectator extends AbstractGraphicAgent {
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		panic(g2d);
+		//panic(g2d);
 		g2d.setColor(Color.blue);
-		g2d.fillOval((int)pos.getX(), (int)pos.getY(), 8, 8);
+		g2d.fillOval((int)this.pos.getX(), (int)this.pos.getY(), 8, 8);
 	}
 	public void panic(Graphics2D g2d)
 	{

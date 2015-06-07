@@ -20,7 +20,7 @@ public class GraphicArtist extends AbstractGraphicAgent {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.blue);
+		g2d.setColor(Color.green.darker());
 		g2d.fillOval((int)pos.getX(), (int)pos.getY(), 8, 8);
 	}
 

@@ -40,6 +40,7 @@ import fr.utbm.info.vi51.framework.environment.EnvironmentAgent;
 import fr.utbm.info.vi51.framework.environment.StopSimulation;
 import fr.utbm.info.vi51.framework.gui.FrameworkGUI;
 import fr.utbm.info.vi51.framework.util.SpawnMapping;
+import fr.utbm.vi51.project.eurock.GUI.Graphics.Frame.Window;
 
 /**
  * Launcher of the simulation framework.
@@ -53,7 +54,7 @@ public class FrameworkLauncher {
 	
 	private static UUID environmentInteractionSpace = null;
 	private static Environment environmentSingleton = null;
-	private static FrameworkGUI uiSingleton = null;
+	private static Window uiSingleton = null;
 	private static Kernel kernel = null;
 	private static final AtomicBoolean canStop = new AtomicBoolean(false);
 
@@ -68,7 +69,7 @@ public class FrameworkLauncher {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void launchSimulation(Environment environment, SpawnMapping spawnMapping,
-			DynamicType behaviorType, FrameworkGUI gui, Object... parameters) throws Exception {
+			DynamicType behaviorType, Window gui, Object... parameters) throws Exception {
 		Boot.setOffline(true);
 		Boot.setVerboseLevel(LoggerCreator.toInt(Level.INFO));
 		Boot.showJanusLogo();
@@ -91,7 +92,7 @@ public class FrameworkLauncher {
 				params);
 		if (uiSingleton != null) {
 			if (environmentSingleton != null) {
-				environmentSingleton.addEnvironmentListener(uiSingleton);
+				//environmentSingleton.addEnvironmentListener(uiSingleton);
 			}
 			uiSingleton.setVisible(true);
 		}
@@ -113,7 +114,7 @@ public class FrameworkLauncher {
 		if (uiSingleton!=null) {
 			uiSingleton.setVisible(false);
 			if (environmentSingleton != null) {
-				environmentSingleton.removeEnvironmentListener(uiSingleton);
+				//environmentSingleton.removeEnvironmentListener(uiSingleton);
 			}
 			uiSingleton.dispose();
 		}
@@ -132,7 +133,7 @@ public class FrameworkLauncher {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void launchDistributedEnvironment(Class<? extends EnvironmentAgent> environmentAgentType,
-			Environment environment, FrameworkGUI gui) throws Exception {
+			Environment environment, Window gui) throws Exception {
 		Boot.setOffline(false);
 		Boot.setVerboseLevel(LoggerCreator.toInt(Level.INFO));
 		Boot.showJanusLogo();
@@ -152,7 +153,7 @@ public class FrameworkLauncher {
 				params);
 		if (uiSingleton != null) {
 			if (environmentSingleton != null) {
-				environmentSingleton.addEnvironmentListener(uiSingleton);
+				//environmentSingleton.addEnvironmentListener(uiSingleton);
 			}
 			uiSingleton.setVisible(true);
 		}

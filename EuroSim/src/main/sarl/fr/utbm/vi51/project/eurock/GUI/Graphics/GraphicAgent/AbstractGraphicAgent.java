@@ -8,6 +8,7 @@ import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.math.Circle2f;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
+import fr.utbm.info.vi51.framework.math.Vector2f;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
 
 public abstract class AbstractGraphicAgent extends AbstractGraphicElement {
@@ -31,9 +32,12 @@ public abstract class AbstractGraphicAgent extends AbstractGraphicElement {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		
 		if (this.realAgent != null)
+		{
 			this.pos = this.realAgent.getPosition();
-		repaint();
+		}
+		revalidate();
 	}
 
 	@Override

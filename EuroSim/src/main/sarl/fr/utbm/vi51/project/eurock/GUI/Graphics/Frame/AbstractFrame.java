@@ -9,7 +9,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractComponent;
-import fr.utbm.vi51.project.eurock.GUI.Graphics.AbstractGraphicElement;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicAgent.AbstractGraphicAgent;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.GraphicBuilding.AbstractGraphicBuilding;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Layout.AbstractLayout;
