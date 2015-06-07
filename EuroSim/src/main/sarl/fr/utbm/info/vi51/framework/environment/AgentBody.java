@@ -29,6 +29,7 @@ import fr.utbm.info.vi51.framework.math.MathUtil;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
 import fr.utbm.info.vi51.framework.util.LocalizedString;
+import fr.utbm.vi51.project.eurock.environment.State;
 
 /**
  * Object on the environment.
@@ -41,6 +42,7 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	private static final long serialVersionUID = -4636419559142339321L;
 	
 	private final Frustum frustum;
+	private final State state;
 	
 	private transient MotionInfluence motionInfluence = null;
 	private transient List<Influence> otherInfluences = new ArrayList<>();
@@ -54,12 +56,14 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 * @param maxAngularSpeed is the maximal angular speed.
 	 * @param maxAngularAcceleration is the maximal angular acceleration.
 	 * @param frustum the field-of-view associated to the body.
+	 * @param state the actual state of the agent
 	 */
 	public AgentBody(UUID id, Shape2f<?> shape, float maxLinearSpeed, float maxLinearAcceleration,
-			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum) {
+			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum, State state) {
 		super(id, shape, maxLinearSpeed, maxLinearAcceleration, maxAngularSpeed, maxAngularAcceleration);
 		assert (frustum == null || Objects.equals(id, frustum.getOwner()));
 		this.frustum = frustum;
+		this.state = state;
 		setType("BODY");
 	}
 	
@@ -91,6 +95,14 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 */
 	public Frustum getFrustum() {
 		return this.frustum;
+	}
+	
+	/** Replies the state associated to this body.
+	 *
+	 * @return the state.
+	 */
+	public State getState() {
+		return this.state;
 	}
 	
 	/** Invoked to send the given influence to the environment.
@@ -253,6 +265,6 @@ public class AgentBody extends AbstractMobileObject implements Body {
 		assert(perceptions!=null);
 		this.perceptionsAlert = perceptions;
 	}
-
+	
 
 }

@@ -44,7 +44,7 @@ agent SecurityAgent extends AbstractAnimat {
 					WANDER_MAX_ROTATION,
 					STOP_RADIUS,
 					SLOW_RADIUS);
-		this.alertBehaviour = new AlertBehaviour(3.4F);
+		this.alertBehaviour = new AlertBehaviour;
 		emit(new SimulationAgentReady)
 	}
 	
@@ -67,7 +67,7 @@ agent SecurityAgent extends AbstractAnimat {
 			emitInfluence(
 				this.alertBehaviour.runAlert(
 					occurrence.body.position,
-					occurrence.perceptionsView
+					occurrence.perceptionsAlert
 				),
 				new TypeChangeInfluence("ALERTED")
 			)	
