@@ -16,6 +16,7 @@ import fr.utbm.vi51.project.eurock.behaviour.FleeBehaviour
 import fr.utbm.vi51.project.eurock.behaviour.SteeringFleeBehaviour
 import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
 import fr.utbm.vi51.project.eurock.behaviour.AlertBehaviour
+import fr.utbm.vi51.project.eurock.environment.State;
 
 /**
  * @author Thomas
@@ -48,13 +49,10 @@ agent Artist extends AbstractAnimat {
 		var target = occurrence.perceptionsView.first
 		
 		if (target.type === "ALERT") {
-			emitInfluence(
-				this.alertBehaviour.runAlert(
-					occurrence.body.position,
-					occurrence.perceptionsAlert
-				),
-				new TypeChangeInfluence("ALERTED")
-			)	
+				if(this.alertBehaviour.runAlert(occurrence.perceptionsAlert)){
+					occurrence.body.setState(State.ALERTED);
+				}
+				//new TypeChangeInfluence("ALERTED")	
 		} else if (target.type === "EXIT") {
 			emitInfluence(
 				this.seekBehaviourExit.runSeek(

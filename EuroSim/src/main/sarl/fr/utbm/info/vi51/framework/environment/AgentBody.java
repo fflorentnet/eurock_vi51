@@ -42,7 +42,7 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	private static final long serialVersionUID = -4636419559142339321L;
 	
 	private final Frustum frustum;
-	private final State state;
+	private State state;
 	
 	private transient MotionInfluence motionInfluence = null;
 	private transient List<Influence> otherInfluences = new ArrayList<>();
@@ -59,11 +59,11 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 * @param state the actual state of the agent
 	 */
 	public AgentBody(UUID id, Shape2f<?> shape, float maxLinearSpeed, float maxLinearAcceleration,
-			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum, State state) {
+			float maxAngularSpeed, float maxAngularAcceleration, Frustum frustum) {
 		super(id, shape, maxLinearSpeed, maxLinearAcceleration, maxAngularSpeed, maxAngularAcceleration);
 		assert (frustum == null || Objects.equals(id, frustum.getOwner()));
 		this.frustum = frustum;
-		this.state = state;
+		this.state = State.CALM;
 		setType("BODY");
 	}
 	
@@ -103,6 +103,14 @@ public class AgentBody extends AbstractMobileObject implements Body {
 	 */
 	public State getState() {
 		return this.state;
+	}
+	
+	/** Set the state associated to this body.
+	 *
+	 * @return the state.
+	 */
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 	/** Invoked to send the given influence to the environment.

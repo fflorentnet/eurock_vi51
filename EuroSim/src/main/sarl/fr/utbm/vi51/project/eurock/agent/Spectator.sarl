@@ -17,6 +17,7 @@ import fr.utbm.vi51.project.eurock.behaviour.AlertBehaviour
 import fr.utbm.vi51.project.eurock.behaviour.SteeringFleeBehaviour
 import fr.utbm.vi51.project.eurock.behaviour.SteeringSeekBehaviour
 import fr.utbm.info.vi51.framework.math.MathUtil;
+import fr.utbm.vi51.project.eurock.environment.State;
 
 /**
  * @author Nicolas
@@ -60,13 +61,9 @@ agent Spectator extends AbstractAnimat {
 		var target = occurrence.perceptionsView.first
 	
 		if (target.type === "ALERT") {
-			emitInfluence(
-				this.alertBehaviour.runAlert(
-					occurrence.body.position,
-					occurrence.perceptionsAlert
-				),
-				new TypeChangeInfluence("ALERTED")
-			)	
+				if(this.alertBehaviour.runAlert(occurrence.perceptionsAlert)){
+					occurrence.body.setState(State.ALERTED);
+				}
 		} else if (target.type === "EXIT") {
 			emitInfluence(
 				this.seekBehaviourExit.runSeek(

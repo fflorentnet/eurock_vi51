@@ -16,6 +16,7 @@ import fr.utbm.vi51.project.eurock.influence.TypeChangeInfluence
 import fr.utbm.vi51.project.eurock.behaviour.SeekBehaviour
 import fr.utbm.vi51.project.eurock.behaviour.SteeringSeekBehaviour
 import fr.utbm.vi51.project.eurock.behaviour.AlertBehaviour
+import fr.utbm.vi51.project.eurock.environment.State;
 
 /**
  * @author Thomas
@@ -64,13 +65,9 @@ agent SecurityAgent extends AbstractAnimat {
 				new TypeChangeInfluence("CALM")
 			)
 		} else if (target.type === "ALERT") {
-			emitInfluence(
-				this.alertBehaviour.runAlert(
-					occurrence.body.position,
-					occurrence.perceptionsAlert
-				),
-				new TypeChangeInfluence("ALERTED")
-			)	
+				if(this.alertBehaviour.runAlert(occurrence.perceptionsAlert)){
+					occurrence.body.setState(State.ALERTED);
+				}	
 		} else if (target.type === "BOMB") {
 			emitInfluence(
 				this.seekBehaviourBomb.runSeek(

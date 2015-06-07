@@ -28,6 +28,7 @@ import com.google.common.base.Objects;
 import fr.utbm.info.vi51.framework.math.Point2f;
 import fr.utbm.info.vi51.framework.math.Shape2f;
 import fr.utbm.info.vi51.framework.math.Vector2f;
+import fr.utbm.vi51.project.eurock.environment.State;
 
 /**
  * Defined a perception unit.
@@ -52,6 +53,8 @@ public class Percept implements MobileObject, Serializable {
 	private final float maxAngularAcceleration;
 	private final float currentAngularSpeed;
 	private final String name;
+	// A VERIFIER
+	private State state;
 	
 	/**
 	 * @param perceivedObject is the perceived object.
@@ -96,9 +99,13 @@ public class Percept implements MobileObject, Serializable {
 		}
 		if (perceivedObject instanceof AgentBody) {
 			this.bodyId = ((AgentBody) perceivedObject).getID();
+			this.state = ((AgentBody) perceivedObject).getState();
 		} else {
 			this.bodyId = null;
+			this.state = null;
 		}
+		// A VERIFIER
+		
 	}
 	
 	@Override
@@ -248,6 +255,19 @@ public class Percept implements MobileObject, Serializable {
 			return this.name;
 		}
 		return super.toString();
+	}
+	
+	// A VERIFIER
+	/** Replies the state of the body.
+	 *
+	 * @return the state of the body.
+	 */
+	public State getState() {
+		return this.state;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
 	}
 		
 }
