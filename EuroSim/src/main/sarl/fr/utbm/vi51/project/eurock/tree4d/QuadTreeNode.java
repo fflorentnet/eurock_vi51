@@ -54,47 +54,50 @@ public class QuadTreeNode<D extends ShapedObject> {
 			Point2f Upper = bounds.getUpper();
 			Point2f Center = bounds.getCenter();
 
-			// Le noeud est une feuille avec des donn�es:
-			// -> Il faut cr�er les fils
-			if (lData.isEmpty() && !b)
-			{
-				lData.add(nData);
-				if (children[LEFTTOP] == null)
-				{
-					children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
-					children[LEFTTOP].add(nData, true);					
-				}
-				if (children[RIGHTTOP] == null)
-				{
-					children[RIGHTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(
-							Center.getX(), Lower.getY(), 
-							Upper.getX(),  Lower.getY()
-							));
-					children[RIGHTTOP].add(nData, true);
-				}
-				
-				if (children[LEFTBOTTOM] == null)
-				{
-				children[LEFTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f( 
-						Center.getX(), Lower.getY(),
-						Upper.getX(), Center.getY()
-						));
-				children[LEFTBOTTOM].add(nData, true);
-				}
-
-				if (children[RIGHTBOTTOM] == null)
-				{
-					children[RIGHTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
-					children[RIGHTBOTTOM].add(nData, true);
-				}
-
-			}
-
 			// Le noeud n'est pas une feuille
 			// OU il se trouve sur un axe/dans deux noeuds
 			if (lData.size() < LIMITE)
 			{
 				lData.add(nData);
+			}
+			else
+			{
+				// Le noeud est une feuille avec des donn�es:
+				// -> Il faut cr�er les fils
+				if (!b)
+				{
+					lData.add(nData);
+					if (children[LEFTTOP] == null)
+					{
+						children[LEFTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(Lower, Center));
+					}
+					children[LEFTTOP].add(nData, true);					
+					
+					if (children[RIGHTTOP] == null)
+					{
+						children[RIGHTTOP] = new QuadTreeNode<D>(this, new Rectangle2f(
+								Center.getX(), Lower.getY(), 
+								Upper.getX(),  Lower.getY()
+								));
+					}
+					children[RIGHTTOP].add(nData, true);
+					
+					if (children[LEFTBOTTOM] == null)
+					{
+					children[LEFTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f( 
+							Center.getX(), Lower.getY(),
+							Upper.getX(), Center.getY()
+							));
+					}
+					children[LEFTBOTTOM].add(nData, true);
+					
+					if (children[RIGHTBOTTOM] == null)
+					{
+						children[RIGHTBOTTOM] = new QuadTreeNode<D>(this, new Rectangle2f(Center, Upper));
+					}
+					children[RIGHTBOTTOM].add(nData, true);
+					
+				}
 			}
 		}
 	}

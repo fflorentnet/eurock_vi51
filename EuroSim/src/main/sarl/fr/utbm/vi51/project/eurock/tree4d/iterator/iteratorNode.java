@@ -10,42 +10,43 @@ import fr.utbm.vi51.project.eurock.tree4d.QuadTreeNode;
 
 public class iteratorNode<D extends ShapedObject> implements Iterator<QuadTreeNode<D>>
 {
-private Stack<QuadTreeNode<D>> stack = new Stack<QuadTreeNode<D>>();
+	private Stack<QuadTreeNode<D>> stack = new Stack<QuadTreeNode<D>>();
 
-public iteratorNode(QuadTree<D> tree){
-stack.add(tree.getRoot());
-}
+	public iteratorNode(QuadTree<D> tree){
+		stack.add(tree.getRoot());
+	}
 
-public iteratorNode(QuadTreeNode<D> quadTreeNode) {
-stack.add(quadTreeNode);
-}
+	public iteratorNode(QuadTreeNode<D> quadTreeNode) {
+		stack.add(quadTreeNode);
+	}
 
-@Override
-public boolean hasNext() {
-if(!stack.isEmpty()){
-return true; 
-}else{
-return false;
-}
-}
+	@Override
+	public boolean hasNext() {
+		if(!stack.isEmpty()){
+			return true; 
+		}else{
+			return false;
+		}
+	}
 
-@Override
-public QuadTreeNode<D> next() {
-QuadTreeNode<D> tmp;
-tmp = stack.pop();
-if(!tmp.isLeaf()){
-for(int i = 0; i < 4 ; i++ ){
-stack.add(tmp.getChildren()[i]);
-}
-}
-return tmp;
-}
+	@Override
+	public QuadTreeNode<D> next() {
+		QuadTreeNode<D> tmp;
+		tmp = stack.pop();
+		if(!tmp.isLeaf()){
+			for(int i = 0; i < 4 ; i++ ){
+				if (tmp.getChildren()[i] != null)
+					stack.add(tmp.getChildren()[i]);
+			}
+		}
+		return tmp;
+	}
 
-@Override
-public void remove() {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+
+	}
 
 
 }

@@ -1,5 +1,7 @@
 package fr.utbm.vi51.project.eurock.GUI.Graphics.Frame;
 
+import java.util.Iterator;
+
 import fr.utbm.info.vi51.framework.environment.AgentBody;
 import fr.utbm.info.vi51.framework.environment.SituatedObject;
 import fr.utbm.vi51.project.eurock.GUI.Graphics.Buttons.AddAgentButton;
@@ -62,14 +64,22 @@ public class Window extends AbstractFrame {
 					this.addBuilding(new GraphicScene(obj.getShape()));
 
 				}
+			
 			}
+			Iterator it = this.environment.getSpatialDataStructureImmobile().dataIterator(); 
+			while (it.hasNext())
+			{
+				SituatedObject obj = (SituatedObject)it.next();
+				this.addBuilding(new GraphicScene(obj.getShape()));				
+			}
+			System.out.println("Fini de parcourir le QuadTree.");
 		}
 	}
 	private Window(String title, int h, int w) {
 		super(title, h, w);
 		int wx, wy;
-		wx = 800;
-		wy = 800;
+		wx = 700;
+		wy = 700;
 		this.gui = new LayoutGUI<>(h, w);
 		this.gui.setDoubleBuffered(true);
 		this.map = new LayoutMap<>(wx, wy);
